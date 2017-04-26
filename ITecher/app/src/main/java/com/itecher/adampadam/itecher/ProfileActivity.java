@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.itecher.adampadam.itecher.data.DictDbHelper;
@@ -37,6 +38,15 @@ public class ProfileActivity extends AppCompatActivity {
 
         updateProfile();
 
+
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
     }
 

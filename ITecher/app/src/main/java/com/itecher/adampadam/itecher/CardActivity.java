@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +45,9 @@ public class CardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_card);
 
         context = getApplicationContext();
+
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
         search_et = (EditText) findViewById(R.id.search_edittext_my_dict);
         search_btn = (ImageButton) findViewById(R.id.search_btn_my_dict);
@@ -186,6 +190,9 @@ public class CardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+
                 list_new_word = dictdbh.get_word_from_db(db);
 
                 if (list_new_word.size() > 0) {
@@ -213,6 +220,9 @@ public class CardActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+
+                    InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
                     list_new_word = dictdbh.get_word_from_db(db);
 
@@ -279,6 +289,15 @@ public class CardActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+
+    }
+
     private static void fillData(ArrayList<Word> list, int b) {
 
         last = b;
@@ -342,12 +361,11 @@ public class CardActivity extends AppCompatActivity {
 
     public static void updateCard() {
 
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
         list_new_word = dictdbh.get_word_from_db(db);
-
         word.clear();
-
         fillData(list_new_word, last);
-
         boxAdapter = new BoxAdapter(context, word, true);
         lvMain.setAdapter(boxAdapter);
 

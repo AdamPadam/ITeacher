@@ -1,9 +1,11 @@
 package com.itecher.adampadam.itecher;
 
 import android.app.ActivityGroup;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TabHost;
 
 import com.itecher.adampadam.itecher.practice.PracticeActivity;
@@ -11,11 +13,14 @@ import com.itecher.adampadam.itecher.practice.PracticeActivity;
 public class MainActivity extends ActivityGroup {
 
     public static boolean isBack = false;
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        context = getApplicationContext();
 
         Resources res = getResources();
 
@@ -59,6 +64,15 @@ public class MainActivity extends ActivityGroup {
             tabHost.setCurrentTab(2);
 
         }
+
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
     }
 
