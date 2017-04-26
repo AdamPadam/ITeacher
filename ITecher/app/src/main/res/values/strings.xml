@@ -33,7 +33,7 @@
     <string name="word3">слова</string>
     <string name="pract1">тренировок</string>
     <string name="pract2">тренировка</string>
-    <string name="pract3"></string>
+    <string name="pract3">тренировки</string>
     <string name="err">ОШИБКА</string>
 
     <string name="search">Поиск</string>
@@ -47,7 +47,14 @@
 
     <string name="practice_text">тренировать слова из словоря:</string>
     <string name="practice_go_text">НАЧАТЬ</string>
-    <string name="is_little_word">в словаре меньше 4 слов</string>
+    <string name="is_little_word">в словаре нет слов</string>
+    <string name="bad_practice">Плохо</string>
+    <string name="notbad__practice">Неплохо</string>
+    <string name="good__practice">Отлично</string>
+    <string name="beast_practice">Превосходно</string>
+    <string name="you_answer_text">,\n ты ответил на:</string>
+    <string name="back_to_menu">вернуться в меню</string>
+    <string name="practice_again">пройти тренировку ещё раз</string>
 
     <string-array name="group">
         <item>все</item>

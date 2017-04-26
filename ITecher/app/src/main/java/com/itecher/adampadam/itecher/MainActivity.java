@@ -6,6 +6,8 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TabHost;
 
+import com.itecher.adampadam.itecher.practice.PracticeActivity;
+
 public class MainActivity extends ActivityGroup {
 
     public static boolean isBack = false;
@@ -44,11 +46,6 @@ public class MainActivity extends ActivityGroup {
         tabSpec.setIndicator("", res.getDrawable(R.mipmap.ic_google_translate_light));
         tabHost.addTab(tabSpec);
 
-        tabSpec = tabHost.newTabSpec("settings");
-        tabSpec.setContent(new Intent(this, SettingsActivity.class));
-        tabSpec.setIndicator("", res.getDrawable(R.mipmap.ic_settings_light));
-        tabHost.addTab(tabSpec);
-
         if (isBack) {
 
             tabHost.setCurrentTab(3);
@@ -59,7 +56,6 @@ public class MainActivity extends ActivityGroup {
             tabHost.setCurrentTab(0);
             tabHost.setCurrentTab(1);
             tabHost.setCurrentTab(3);
-            tabHost.setCurrentTab(4);
             tabHost.setCurrentTab(2);
 
         }
