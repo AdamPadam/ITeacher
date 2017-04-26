@@ -1,4 +1,4 @@
-package com.itecher.adampadam.itecher.practice;
+package com.itecher.adampadam.itecher;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,9 +11,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.itecher.adampadam.itecher.MainActivity;
-import com.itecher.adampadam.itecher.ProfileActivity;
-import com.itecher.adampadam.itecher.R;
 import com.itecher.adampadam.itecher.adapter.Word;
 import com.itecher.adampadam.itecher.data.DictDbHelper;
 
@@ -34,11 +31,11 @@ public class BeginPracticeActivity extends AppCompatActivity {
     private static Button next;
     public static ArrayList<Word> list_all_word;
     public static ArrayList<Word> list_learn_word;
-    protected static DictDbHelper dictdbh;
-    protected static SQLiteDatabase db;
+    private static DictDbHelper dictdbh;
+    private static SQLiteDatabase db;
     private static int right_answer;
     private static ArrayList<Word> list;
-    public static boolean first_begin = true;
+    public static boolean first = true;
     private static int MAX_ID = 167;
 
     @Override
@@ -62,7 +59,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
         list_learn_word = dictdbh.get_word_from_db(db);
         list_all_word = getAllWord();
 
-        if (first_begin) {
+        if (first) {
             update();
         }
 
@@ -83,8 +80,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     answer1.setBackgroundColor(getResources().getColor(R.color.green));
                     right.setText(getResources().getString(R.string.right));
                     right.setBackgroundColor(getResources().getColor(R.color.green));
-                    EndPracticeActivity.all_word_number++;
-                    EndPracticeActivity.right_word_number++;
+
 
                 } else if (right_answer == 1) {
 
@@ -95,7 +91,6 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     answer4.setBackgroundColor(getResources().getColor(R.color.red));
                     right.setText(getResources().getString(R.string.not_right));
                     right.setBackgroundColor(getResources().getColor(R.color.red));
-                    EndPracticeActivity.all_word_number++;
 
                 } else if (right_answer == 2) {
 
@@ -106,7 +101,6 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     answer4.setBackgroundColor(getResources().getColor(R.color.red));
                     right.setText(getResources().getString(R.string.not_right));
                     right.setBackgroundColor(getResources().getColor(R.color.red));
-                    EndPracticeActivity.all_word_number++;
 
                 } else {
 
@@ -117,7 +111,6 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     answer4.setBackgroundColor(getResources().getColor(R.color.green));
                     right.setText(getResources().getString(R.string.not_right));
                     right.setBackgroundColor(getResources().getColor(R.color.red));
-                    EndPracticeActivity.all_word_number++;
 
                 }
 
@@ -146,7 +139,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     answer4.setBackgroundColor(getResources().getColor(R.color.red));
                     right.setText(getResources().getString(R.string.not_right));
                     right.setBackgroundColor(getResources().getColor(R.color.red));
-                    EndPracticeActivity.all_word_number++;
+
 
                 } else if (right_answer == 1) {
 
@@ -154,8 +147,6 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     answer2.setBackgroundColor(getResources().getColor(R.color.green));
                     right.setText(getResources().getString(R.string.right));
                     right.setBackgroundColor(getResources().getColor(R.color.green));
-                    EndPracticeActivity.all_word_number++;
-                    EndPracticeActivity.right_word_number++;
 
                 } else if (right_answer == 2) {
 
@@ -166,7 +157,6 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     answer4.setBackgroundColor(getResources().getColor(R.color.red));
                     right.setText(getResources().getString(R.string.not_right));
                     right.setBackgroundColor(getResources().getColor(R.color.red));
-                    EndPracticeActivity.all_word_number++;
 
                 } else {
 
@@ -177,7 +167,6 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     answer4.setBackgroundColor(getResources().getColor(R.color.green));
                     right.setText(getResources().getString(R.string.not_right));
                     right.setBackgroundColor(getResources().getColor(R.color.red));
-                    EndPracticeActivity.all_word_number++;
 
                 }
 
@@ -206,7 +195,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     answer4.setBackgroundColor(getResources().getColor(R.color.red));
                     right.setText(getResources().getString(R.string.not_right));
                     right.setBackgroundColor(getResources().getColor(R.color.red));
-                    EndPracticeActivity.all_word_number++;
+
 
                 } else if (right_answer == 1) {
 
@@ -217,7 +206,6 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     answer4.setBackgroundColor(getResources().getColor(R.color.red));
                     right.setText(getResources().getString(R.string.not_right));
                     right.setBackgroundColor(getResources().getColor(R.color.red));
-                    EndPracticeActivity.all_word_number++;
 
                 } else if (right_answer == 2) {
 
@@ -225,8 +213,6 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     answer3.setBackgroundColor(getResources().getColor(R.color.green));
                     right.setText(getResources().getString(R.string.right));
                     right.setBackgroundColor(getResources().getColor(R.color.green));
-                    EndPracticeActivity.all_word_number++;
-                    EndPracticeActivity.right_word_number++;
 
                 } else {
 
@@ -237,7 +223,6 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     answer4.setBackgroundColor(getResources().getColor(R.color.green));
                     right.setText(getResources().getString(R.string.not_right));
                     right.setBackgroundColor(getResources().getColor(R.color.red));
-                    EndPracticeActivity.all_word_number++;
 
                 }
 
@@ -266,7 +251,6 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     answer4.setBackgroundColor(getResources().getColor(R.color.red));
                     right.setText(getResources().getString(R.string.not_right));
                     right.setBackgroundColor(getResources().getColor(R.color.red));
-                    EndPracticeActivity.all_word_number++;
 
                 } else if (right_answer == 1) {
 
@@ -277,7 +261,6 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     answer4.setBackgroundColor(getResources().getColor(R.color.red));
                     right.setText(getResources().getString(R.string.not_right));
                     right.setBackgroundColor(getResources().getColor(R.color.red));
-                    EndPracticeActivity.all_word_number++;
 
                 } else if (right_answer == 2) {
 
@@ -288,7 +271,6 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     answer4.setBackgroundColor(getResources().getColor(R.color.red));
                     right.setText(getResources().getString(R.string.not_right));
                     right.setBackgroundColor(getResources().getColor(R.color.red));
-                    EndPracticeActivity.all_word_number++;
 
                 } else {
 
@@ -296,8 +278,6 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     answer4.setBackgroundColor(getResources().getColor(R.color.green));
                     right.setText(getResources().getString(R.string.right));
                     right.setBackgroundColor(getResources().getColor(R.color.green));
-                    EndPracticeActivity.all_word_number++;
-                    EndPracticeActivity.right_word_number++;
 
                 }
 
@@ -389,7 +369,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
 
         int r1 = rnd.nextInt(list_all_word.size());
 
-        while (((list_all_word.get(r1)).getRus_word()).equals((list_learn_word.get(right_answer)).getRus_word())) {
+        while (list_all_word.get(r1).equals(list_learn_word.get(right_answer))) {
 
             r1 = rnd.nextInt(list_all_word.size());
 
@@ -400,7 +380,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
 
         int r2 = rnd.nextInt(list_all_word.size());
 
-        while (((list_all_word.get(r2)).getRus_word()).equals((list_learn_word.get(right_answer)).getRus_word()) || r2 == r1) {
+        while (list_all_word.get(r2).equals(list_learn_word.get(right_answer)) || r2 == r1) {
 
             r2 = rnd.nextInt(list_all_word.size());
 
@@ -411,7 +391,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
 
         int r3 = rnd.nextInt(list_all_word.size());
 
-        while (((list_all_word.get(r3)).getRus_word()).equals((list_learn_word.get(right_answer)).getRus_word()) || r3 == r1 || r3 == r2) {
+        while (list_all_word.get(r3).equals(list_learn_word.get(right_answer)) || r3 == r1 || r3 == r2) {
 
             r3 = rnd.nextInt(list_all_word.size());
 
@@ -487,6 +467,8 @@ public class BeginPracticeActivity extends AppCompatActivity {
         list_learn_word = fillData(list_learn_word, PracticeActivity.group_number);
         list = get4Words();
 
+        Log.d("mLog", "--------------------------------------------------" + PracticeActivity.type_number + "------------------------------------------------------------------");
+
         if (PracticeActivity.type_number == 1) {
 
             question.setText((list.get(right_answer)).getRus_word());
@@ -548,8 +530,8 @@ public class BeginPracticeActivity extends AppCompatActivity {
         ProfileActivity.PracticeCount++;
         list_learn_word = dictdbh.get_word_from_db(db);
         list_all_word = getAllWord();
-        if (!EndPracticeActivity.first_end) EndPracticeActivity.update();
-        Intent intent = new Intent(context, EndPracticeActivity.class);
+        MainActivity.isBack = true;
+        Intent intent = new Intent(context, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
 

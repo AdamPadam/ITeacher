@@ -22,10 +22,10 @@
         </activity>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".CardActivity" />
-        <activity android:name=".practice.PracticeActivity" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".PracticeActivity" />
         <activity android:name=".DictActivity" />
-        <activity android:name=".practice.BeginPracticeActivity" />
-        <activity android:name=".practice.EndPracticeActivity"></activity>
+        <activity android:name=".BeginPracticeActivity"></activity>
     </application>
 
 </manifest>

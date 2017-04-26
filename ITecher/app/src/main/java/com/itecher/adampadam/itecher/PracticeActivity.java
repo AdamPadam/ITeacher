@@ -1,4 +1,4 @@
-package com.itecher.adampadam.itecher.practice;
+package com.itecher.adampadam.itecher;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.itecher.adampadam.itecher.R;
 import com.itecher.adampadam.itecher.data.DictDbHelper;
 
 public class PracticeActivity extends AppCompatActivity {
@@ -108,9 +107,9 @@ public class PracticeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if ((dictdbh.get_word_from_db(db)).size() >= 1) {
+                if ((dictdbh.get_word_from_db(db)).size() >= 4) {
 
-                    if (!BeginPracticeActivity.first_begin) BeginPracticeActivity.update();
+                    if (!BeginPracticeActivity.first) BeginPracticeActivity.update();
                     startActivity(new Intent(context, BeginPracticeActivity.class));
 
                 } else {
