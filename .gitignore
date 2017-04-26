@@ -59,3 +59,5 @@ ITecher/settings.gradle
 ITecher/gradlew.bat
 ITecher/ITecher.iml
 ITecher/build/intermediates/dex-cache/cache.xml
+ITecher/.idea/inspectionProfiles/Project_Default.xml
+ITecher/.idea/inspectionProfiles/profiles_settings.xml
