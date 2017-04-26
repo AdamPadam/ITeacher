@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -39,10 +38,10 @@ public class PracticeActivity extends AppCompatActivity {
 
         type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            String[] choose = getResources().getStringArray(R.array.group_my_dict);
-
             @Override
             public void onItemSelected(AdapterView<?> parent, View itemSelected, int selectedItemPosition, long selectedId) {
+
+                String[] choose = getResources().getStringArray(R.array.type);
 
                 if (choose[selectedItemPosition].equals(getResources().getString(R.string.word_translate))) {
 
@@ -88,22 +87,6 @@ public class PracticeActivity extends AppCompatActivity {
                 } else if (choose[selectedItemPosition].equals(getResources().getString(R.string.net))) {
 
                     group_number = 4;
-
-                } else if (choose[selectedItemPosition].equals(getResources().getString(R.string.unknown_word))) {
-
-                    group_number = 5;
-
-                } else if (choose[selectedItemPosition].equals(getResources().getString(R.string.bad_know_word))) {
-
-                    group_number = 6;
-
-                } else if (choose[selectedItemPosition].equals(getResources().getString(R.string.good_know_word))) {
-
-                    group_number = 7;
-
-                } else if (choose[selectedItemPosition].equals(getResources().getString(R.string.the_best_know_word))) {
-
-                    group_number = 8;
 
                 } else {
 

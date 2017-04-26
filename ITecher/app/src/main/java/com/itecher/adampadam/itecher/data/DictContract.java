@@ -7,8 +7,8 @@ public final class DictContract {
     private DictContract() {
     }
 
-    //таблица для слов добавленных в словарь
     public static final class MainDict implements BaseColumns {
+
         public final static String TABLE_NAME = "MyDict";
 
         public final static String _ID = "id";

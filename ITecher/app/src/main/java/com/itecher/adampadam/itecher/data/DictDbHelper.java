@@ -7,17 +7,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.util.ArrayList;
-
 import com.itecher.adampadam.itecher.ProfileActivity;
 import com.itecher.adampadam.itecher.adapter.Word;
 
+import java.util.ArrayList;
+
 public class DictDbHelper extends SQLiteOpenHelper {
 
-    public ArrayList<String[]> list;
     private static final String DATABASE_NAME = "main_dict.db";
     private static final int DATABASE_VERSION = 2;
-    public String[] s;
 
     public DictDbHelper(Context context) {
 
@@ -25,7 +23,6 @@ public class DictDbHelper extends SQLiteOpenHelper {
 
     }
 
-    //добавление в базу данных
     public void add_word_in_db(SQLiteDatabase db, Word w) {
 
         ContentValues newValues = new ContentValues();
@@ -42,7 +39,6 @@ public class DictDbHelper extends SQLiteOpenHelper {
 
     }
 
-    //добавление в базу данных
     public void del_word_from_db(SQLiteDatabase db, Word w) {
 
         db.delete(DictContract.MainDict.TABLE_NAME, "id = ?", new String[]{String.valueOf(w.getid())});
@@ -51,7 +47,6 @@ public class DictDbHelper extends SQLiteOpenHelper {
 
     }
 
-    //обновить базу данных
     public void update_word_from_db(SQLiteDatabase db, Word w) {
 
         ContentValues newValues = new ContentValues();
@@ -62,7 +57,6 @@ public class DictDbHelper extends SQLiteOpenHelper {
 
     }
 
-    //добавление в базу данных
     public ArrayList<Word> get_word_from_db(SQLiteDatabase db) {
 
         ArrayList<Word> list = new ArrayList<Word>();
@@ -92,11 +86,9 @@ public class DictDbHelper extends SQLiteOpenHelper {
 
     }
 
-    //Вызывается при создании базы данных
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        // Строка для создания таблицы
         String SQL_CREATE_DICT_TABLE = "CREATE TABLE " + DictContract.MainDict.TABLE_NAME + " ("
                 + DictContract.MainDict._ID + " INTEGER NOT NULL DEFAULT 0, "
                 + DictContract.MainDict.ENG_NAME + " TEXT NOT NULL, "
@@ -104,12 +96,10 @@ public class DictDbHelper extends SQLiteOpenHelper {
                 + DictContract.MainDict.GROUP_NAME + " TEXT NOT NULL, "
                 + DictContract.MainDict.LEARN + " INTEGER NOT NULL DEFAULT 0);";
 
-        // Запускаем создание таблицы
         db.execSQL(SQL_CREATE_DICT_TABLE);
 
     }
 
-    //Вызывается при обновлении схемы базы данных
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 

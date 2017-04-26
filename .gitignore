@@ -58,3 +58,4 @@ ITecher/app/proguard-rules.pro
 ITecher/settings.gradle
 ITecher/gradlew.bat
 ITecher/ITecher.iml
+ITecher/build/intermediates/dex-cache/cache.xml

@@ -15,6 +15,7 @@ public class ProfileActivity extends AppCompatActivity {
     private static TextView unknown;
 
     public static int ItemCount = 0;
+    public static int PracticeCount = 0;
     public static int MAX_ID = 167;
     public static Context context;
     private static DictDbHelper dictDbHelper;
@@ -101,7 +102,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private static int getPractice() {
 
-        return 0;
+        return PracticeCount;
 
     }
 

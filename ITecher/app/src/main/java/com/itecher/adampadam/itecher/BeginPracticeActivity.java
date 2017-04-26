@@ -11,12 +11,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.itecher.adampadam.itecher.adapter.Word;
+import com.itecher.adampadam.itecher.data.DictDbHelper;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-
-import com.itecher.adampadam.itecher.adapter.Word;
-import com.itecher.adampadam.itecher.data.DictDbHelper;
 
 public class BeginPracticeActivity extends AppCompatActivity {
 
@@ -42,8 +42,6 @@ public class BeginPracticeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_begin_practice);
-
-        Log.d("mLog", "---------------------------------------------------------------------------------------------------------");
 
         context = getApplicationContext();
         back = (ImageButton) findViewById(R.id.back_btn);
@@ -76,7 +74,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
                 right.setVisibility(view.VISIBLE);
                 next.setVisibility(view.VISIBLE);
 
-                if (right_answer == 1) {
+                if (right_answer == 0) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() + 1);
                     answer1.setBackgroundColor(getResources().getColor(R.color.green));
@@ -84,7 +82,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     right.setBackgroundColor(getResources().getColor(R.color.green));
 
 
-                } else if (right_answer == 2) {
+                } else if (right_answer == 1) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel());
                     answer1.setBackgroundColor(getResources().getColor(R.color.red));
@@ -94,7 +92,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     right.setText(getResources().getString(R.string.not_right));
                     right.setBackgroundColor(getResources().getColor(R.color.red));
 
-                } else if (right_answer == 3) {
+                } else if (right_answer == 2) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() - 1);
                     answer1.setBackgroundColor(getResources().getColor(R.color.red));
@@ -132,7 +130,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
                 right.setVisibility(view.VISIBLE);
                 next.setVisibility(view.VISIBLE);
 
-                if (right_answer == 1) {
+                if (right_answer == 0) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() - 1);
                     answer1.setBackgroundColor(getResources().getColor(R.color.green));
@@ -143,14 +141,14 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     right.setBackgroundColor(getResources().getColor(R.color.red));
 
 
-                } else if (right_answer == 2) {
+                } else if (right_answer == 1) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() + 1);
                     answer2.setBackgroundColor(getResources().getColor(R.color.green));
                     right.setText(getResources().getString(R.string.right));
                     right.setBackgroundColor(getResources().getColor(R.color.green));
 
-                } else if (right_answer == 3) {
+                } else if (right_answer == 2) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() - 1);
                     answer1.setBackgroundColor(getResources().getColor(R.color.red));
@@ -188,7 +186,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
                 right.setVisibility(view.VISIBLE);
                 next.setVisibility(view.VISIBLE);
 
-                if (right_answer == 1) {
+                if (right_answer == 0) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() - 1);
                     answer1.setBackgroundColor(getResources().getColor(R.color.green));
@@ -199,7 +197,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     right.setBackgroundColor(getResources().getColor(R.color.red));
 
 
-                } else if (right_answer == 2) {
+                } else if (right_answer == 1) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() - 1);
                     answer1.setBackgroundColor(getResources().getColor(R.color.red));
@@ -209,7 +207,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     right.setText(getResources().getString(R.string.not_right));
                     right.setBackgroundColor(getResources().getColor(R.color.red));
 
-                } else if (right_answer == 3) {
+                } else if (right_answer == 2) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() + 1);
                     answer3.setBackgroundColor(getResources().getColor(R.color.green));
@@ -244,7 +242,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
                 right.setVisibility(view.VISIBLE);
                 next.setVisibility(view.VISIBLE);
 
-                if (right_answer == 1) {
+                if (right_answer == 0) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() - 1);
                     answer1.setBackgroundColor(getResources().getColor(R.color.green));
@@ -254,7 +252,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     right.setText(getResources().getString(R.string.not_right));
                     right.setBackgroundColor(getResources().getColor(R.color.red));
 
-                } else if (right_answer == 2) {
+                } else if (right_answer == 1) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() - 1);
                     answer1.setBackgroundColor(getResources().getColor(R.color.red));
@@ -264,7 +262,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
                     right.setText(getResources().getString(R.string.not_right));
                     right.setBackgroundColor(getResources().getColor(R.color.red));
 
-                } else if (right_answer == 3) {
+                } else if (right_answer == 2) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() - 1);
                     answer1.setBackgroundColor(getResources().getColor(R.color.red));
@@ -292,6 +290,8 @@ public class BeginPracticeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                list_learn_word = dictdbh.get_word_from_db(db);
+                list_all_word = getAllWord();
                 MainActivity.isBack = true;
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -357,20 +357,117 @@ public class BeginPracticeActivity extends AppCompatActivity {
 
     private static ArrayList<Word> get4Words() {
 
-        return null;
+
+        ArrayList<Word> list = new ArrayList<>();
+
+        Random rnd = new Random();
+
+        right_answer = rnd.nextInt(list_learn_word.size());
+
+        list.add(list_learn_word.get(right_answer));
+
+
+        int r1 = rnd.nextInt(list_all_word.size());
+
+        while (list_all_word.get(r1).equals(list_learn_word.get(right_answer))) {
+
+            r1 = rnd.nextInt(list_all_word.size());
+
+        }
+
+        list.add(list_all_word.get(r1));
+
+
+        int r2 = rnd.nextInt(list_all_word.size());
+
+        while (list_all_word.get(r2).equals(list_learn_word.get(right_answer)) || r2 == r1) {
+
+            r2 = rnd.nextInt(list_all_word.size());
+
+        }
+
+        list.add(list_all_word.get(r2));
+
+
+        int r3 = rnd.nextInt(list_all_word.size());
+
+        while (list_all_word.get(r3).equals(list_learn_word.get(right_answer)) || r3 == r1 || r3 == r2) {
+
+            r3 = rnd.nextInt(list_all_word.size());
+
+        }
+
+        list.add(list_all_word.get(r3));
+
+
+        Collections.shuffle(list);
+
+        for (int i = 0; i < list.size(); i++) {
+
+            if (list.get(i).equals(list_learn_word.get(right_answer))) {
+
+                list_learn_word.remove(list_learn_word.get(right_answer));
+                right_answer = i;
+                break;
+
+            }
+
+        }
+
+        return list;
     }
 
-    private static void fillData(ArrayList<Word> list, int b) {
+    private static ArrayList<Word> fillData(ArrayList<Word> list, int b) {
+
+        ArrayList<Word> list2 = new ArrayList<Word>();
+
+        for (int i = 0; i < list.size(); i++) {
+
+            if (b == 1) {
+
+                if (((list.get(i)).getGroup()).equals(context.getResources().getString(R.string.useful_verbs)))
+                    list2.add(list.get(i));
+
+            } else if (b == 2) {
+
+                if (((list.get(i)).getGroup()).equals(context.getResources().getString(R.string.computer)))
+                    list2.add(list.get(i));
+
+            } else if (b == 3) {
+
+                if (((list.get(i)).getGroup()).equals(context.getResources().getString(R.string.programming)))
+                    list2.add(list.get(i));
+
+            } else if (b == 4) {
+
+                if (((list.get(i)).getGroup()).equals(context.getResources().getString(R.string.net)))
+                    list2.add(list.get(i));
+
+            } else {
+
+                list2.add(list.get(i));
+
+            }
+
+        }
+
+        return list2;
 
     }
 
     public static void update() {
 
+        answer1.setClickable(true);
+        answer2.setClickable(true);
+        answer3.setClickable(true);
+        answer4.setClickable(true);
+
         if (list_learn_word.size() < 1) end();
 
-        Random rnd = new Random();
-        fillData(list_learn_word, PracticeActivity.group_number);
+        list_learn_word = fillData(list_learn_word, PracticeActivity.group_number);
         list = get4Words();
+
+        Log.d("mLog", "--------------------------------------------------" + PracticeActivity.type_number + "------------------------------------------------------------------");
 
         if (PracticeActivity.type_number == 1) {
 
@@ -390,7 +487,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
 
         } else {
 
-            if (rnd.nextInt(2) == 1) {
+            if (new Random().nextInt(50) % 2 == 0) {
 
                 question.setText((list.get(right_answer)).getEng_word());
                 answer1.setText((list.get(0)).getRus_word());
@@ -419,7 +516,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
         Log.d("mLog", "                 answer2: " + answer2.getText().toString());
         Log.d("mLog", "                 answer3: " + answer3.getText().toString());
         Log.d("mLog", "                 answer4: " + answer4.getText().toString());
-        Log.d("mLog", "                 right: " + String.valueOf(right_answer));
+        Log.d("mLog", "                 right: " + String.valueOf(right_answer + 1));
         Log.d("mLog", "                 lvl: " + String.valueOf((list.get(right_answer).getLevel())));
         Log.d("mLog", "---------------------------------------------------------------------------------------------------------");
         Log.d("mLog", "");
@@ -430,7 +527,9 @@ public class BeginPracticeActivity extends AppCompatActivity {
 
     private static void end() {
 
+        ProfileActivity.PracticeCount++;
         list_learn_word = dictdbh.get_word_from_db(db);
+        list_all_word = getAllWord();
         MainActivity.isBack = true;
         Intent intent = new Intent(context, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

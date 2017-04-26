@@ -15,11 +15,11 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import com.itecher.adampadam.itecher.adapter.BoxAdapter;
 import com.itecher.adampadam.itecher.adapter.Word;
 import com.itecher.adampadam.itecher.data.DictDbHelper;
+
+import java.util.ArrayList;
 
 public class DictActivity extends AppCompatActivity {
 
@@ -217,23 +217,23 @@ public class DictActivity extends AppCompatActivity {
 
                 if (Integer.valueOf(s[3]) == 1) {
 
-                    word.add(new Word(false, s[0], s[1], "полезные глаголы", i + 1));
+                    word.add(new Word(false, s[0], s[1], context.getResources().getString(R.string.useful_verbs), i + 1));
 
                 } else if (Integer.valueOf(s[3]) == 2) {
 
-                    word.add(new Word(false, s[0], s[1], "компютер", i + 1));
+                    word.add(new Word(false, s[0], s[1], context.getResources().getString(R.string.computer), i + 1));
 
                 } else if (Integer.valueOf(s[3]) == 3) {
 
-                    word.add(new Word(false, s[0], s[1], "программирование", i + 1));
+                    word.add(new Word(false, s[0], s[1], context.getResources().getString(R.string.programming), i + 1));
 
                 } else if (Integer.valueOf(s[3]) == 4) {
 
-                    word.add(new Word(false, s[0], s[1], "интернет", i + 1));
+                    word.add(new Word(false, s[0], s[1], context.getResources().getString(R.string.net), i + 1));
 
                 } else if (Integer.valueOf(s[3]) == 4) {
 
-                    word.add(new Word(false, s[0], s[1], "ОШИБКА", i + 1));
+                    word.add(new Word(false, s[0], s[1], context.getResources().getString(R.string.err), i + 1));
 
                 }
 
@@ -289,13 +289,9 @@ public class DictActivity extends AppCompatActivity {
     public static void updateDict() {
 
         list = getWord_for_list(db);
-
         word.clear();
-
         fillData(list, last);
-
         lvMain.setAdapter(boxAdapter);
-
         CardActivity.updateCard();
 
     }

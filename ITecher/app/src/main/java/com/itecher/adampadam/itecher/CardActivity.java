@@ -15,11 +15,11 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import com.itecher.adampadam.itecher.adapter.BoxAdapter;
 import com.itecher.adampadam.itecher.adapter.Word;
 import com.itecher.adampadam.itecher.data.DictDbHelper;
+
+import java.util.ArrayList;
 
 public class CardActivity extends AppCompatActivity {
 
