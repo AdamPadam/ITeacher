@@ -3,7 +3,9 @@ package com.itecher.adampadam.itecher.practice;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import com.itecher.adampadam.itecher.MainActivity;
 import com.itecher.adampadam.itecher.ProfileActivity;
 import com.itecher.adampadam.itecher.R;
+import com.itecher.adampadam.itecher.adapter.Speaker;
 import com.itecher.adampadam.itecher.adapter.Word;
 import com.itecher.adampadam.itecher.data.DictDbHelper;
 
@@ -21,11 +24,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class BeginPracticeActivity extends AppCompatActivity {
+public class SelectListenActivity extends AppCompatActivity {
 
     private static Context context;
     private static ImageButton back;
-    private static TextView question;
+    private static ImageButton question;
     private static TextView right;
     private static Button answer1;
     private static Button answer2;
@@ -36,19 +39,20 @@ public class BeginPracticeActivity extends AppCompatActivity {
     public static ArrayList<Word> list_learn_word;
     protected static DictDbHelper dictdbh;
     protected static SQLiteDatabase db;
-    private static int right_answer;
-    private static ArrayList<Word> list;
+    protected static int right_answer;
+    protected static ArrayList<Word> list;
     public static boolean first_begin = true;
     private static int MAX_ID = 167;
+    protected static Speaker speaker;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_begin_practice);
-
+        setContentView(R.layout.activity_select_listen);
         context = getApplicationContext();
         back = (ImageButton) findViewById(R.id.back_btn);
-        question = (TextView) findViewById(R.id.question);
+        question = (ImageButton) findViewById(R.id.audio_select);
         right = (TextView) findViewById(R.id.right);
         answer1 = (Button) findViewById(R.id.answer_1_btn);
         answer2 = (Button) findViewById(R.id.answer_2_btn);
@@ -58,12 +62,14 @@ public class BeginPracticeActivity extends AppCompatActivity {
 
         dictdbh = new DictDbHelper(context);
         db = dictdbh.getReadableDatabase();
+        speaker = new Speaker(context);
 
         list_learn_word = dictdbh.get_word_from_db(db);
         list_all_word = getAllWord();
 
         if (first_begin) {
             update();
+            speaker.speak((list.get(right_answer)).getEng_word());
         }
 
         answer1.setOnClickListener(new View.OnClickListener() {
@@ -331,6 +337,17 @@ public class BeginPracticeActivity extends AppCompatActivity {
                 answer3.setBackgroundColor(getResources().getColor(R.color.dark_white));
                 answer4.setBackgroundColor(getResources().getColor(R.color.dark_white));
                 update();
+                speaker.speak((list.get(right_answer)).getEng_word());
+
+            }
+        });
+
+        question.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View view) {
+
+                speaker.speak((list.get(right_answer)).getEng_word());
 
             }
         });
@@ -475,6 +492,7 @@ public class BeginPracticeActivity extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public static void update() {
 
         answer1.setClickable(true);
@@ -487,49 +505,15 @@ public class BeginPracticeActivity extends AppCompatActivity {
         list_learn_word = fillData(list_learn_word, PracticeActivity.group_number);
         list = get4Words();
 
-        if (PracticeActivity.type_number == 1) {
-
-            question.setText((list.get(right_answer)).getRus_word());
-            answer1.setText((list.get(0)).getEng_word());
-            answer2.setText((list.get(1)).getEng_word());
-            answer3.setText((list.get(2)).getEng_word());
-            answer4.setText((list.get(3)).getEng_word());
-
-        } else if (PracticeActivity.type_number == 2) {
-
-            question.setText((list.get(right_answer)).getEng_word());
-            answer1.setText((list.get(0)).getRus_word());
-            answer2.setText((list.get(1)).getRus_word());
-            answer3.setText((list.get(2)).getRus_word());
-            answer4.setText((list.get(3)).getRus_word());
-
-        } else {
-
-            if (new Random().nextInt(50) % 2 == 0) {
-
-                question.setText((list.get(right_answer)).getEng_word());
-                answer1.setText((list.get(0)).getRus_word());
-                answer2.setText((list.get(1)).getRus_word());
-                answer3.setText((list.get(2)).getRus_word());
-                answer4.setText((list.get(3)).getRus_word());
-
-            } else {
-
-                question.setText((list.get(right_answer)).getRus_word());
-                answer1.setText((list.get(0)).getEng_word());
-                answer2.setText((list.get(1)).getEng_word());
-                answer3.setText((list.get(2)).getEng_word());
-                answer4.setText((list.get(3)).getEng_word());
-
-            }
-
-        }
+        answer1.setText((list.get(0)).getEng_word());
+        answer2.setText((list.get(1)).getEng_word());
+        answer3.setText((list.get(2)).getEng_word());
+        answer4.setText((list.get(3)).getEng_word());
 
         Log.d("mLog", "");
         Log.d("mLog", "");
         Log.d("mLog", "");
         Log.d("mLog", "---------------------------------------------------------------------------------------------------------");
-        Log.d("mLog", "                 Word: " + question.getText().toString());
         Log.d("mLog", "                 answer1: " + answer1.getText().toString());
         Log.d("mLog", "                 answer2: " + answer2.getText().toString());
         Log.d("mLog", "                 answer3: " + answer3.getText().toString());

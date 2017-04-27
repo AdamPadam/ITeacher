@@ -1,6 +1,8 @@
 package com.itecher.adampadam.itecher.adapter;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,9 +64,21 @@ public class BoxAdapter extends BaseAdapter {
 
         Word word = getWord(position);
 
+        final Speaker speaker = new Speaker(context);
+        final String sp = word.getEng_word();
+
         ((TextView) view.findViewById(R.id.group)).setText(word.getGroup());
         ((TextView) view.findViewById(R.id.eng)).setText(word.getEng_word());
         ((TextView) view.findViewById(R.id.rus)).setText(word.getRus_word());
+        view.findViewById(R.id.listening_btn).setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View v) {
+
+                speaker.speak(sp);
+
+            }
+        });
 
         if (isLearn) {
 

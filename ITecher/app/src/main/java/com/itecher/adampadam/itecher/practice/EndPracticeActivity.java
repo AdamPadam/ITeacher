@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.itecher.adampadam.itecher.MainActivity;
 import com.itecher.adampadam.itecher.R;
@@ -56,16 +55,23 @@ public class EndPracticeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (((BeginPracticeActivity.dictdbh).get_word_from_db(BeginPracticeActivity.db)).size() >= 1) {
+                all_word_number = 0;
+                right_word_number = 0;
 
-                    all_word_number = 0;
-                    right_word_number = 0;
-                    if (!BeginPracticeActivity.first_begin) BeginPracticeActivity.update();
-                    startActivity(new Intent(context, BeginPracticeActivity.class));
+                if (PracticeActivity.type_number == 2 || PracticeActivity.type_number == 1 || PracticeActivity.type_number == 0) {
 
-                } else {
+                    if (!SelectWordActivity.first_begin) SelectWordActivity.update();
+                    startActivity(new Intent(context, SelectWordActivity.class));
 
-                    Toast.makeText(context, getResources().getString(R.string.is_little_word), Toast.LENGTH_SHORT).show();
+                } else if (PracticeActivity.type_number == 3) {
+
+                    if (!SelectListenActivity.first_begin) SelectListenActivity.update();
+                    startActivity(new Intent(context, SelectListenActivity.class));
+
+                } else if (PracticeActivity.type_number == 4) {
+
+                    if (!GrammarListenActivity.first_begin) GrammarListenActivity.update();
+                    startActivity(new Intent(context, GrammarListenActivity.class));
 
                 }
 

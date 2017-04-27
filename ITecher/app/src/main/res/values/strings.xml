@@ -4,30 +4,16 @@
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_practice">PracticeActivity</string>
 
-    <string name="useful_verbs">полезные глаголы</string>
-    <string name="computer">компютер</string>
-    <string name="programming">программирование</string>
-    <string name="net">интернет</string>
-    <string name="unknown_word">не выученые</string>
-    <string name="bad_know_word">плохо выученые</string>
-    <string name="good_know_word">хорошо выученые</string>
-    <string name="the_best_know_word">превосходно выученые</string>
-    <string name="unknown_word_text">не выучено</string>
-    <string name="bad_know_word_text">плохо выучено</string>
-    <string name="good_know_word_text">хорошо выучено</string>
-    <string name="the_best_know_word_text">превосходно выучено</string>
     <string name="random">рандом</string>
-    <string name="word_translate">выбор: слово - перевод</string>
-    <string name="translate_word">выбор: перевод - слово</string>
-
     <string name="begin">начать</string>
     <string name="right">верно</string>
     <string name="not_right">неверно</string>
+    <string name="right_answer_text">", правельный ответ: "</string>
+
 
     <string name="know">изучаем</string>
     <string name="practice">пройдено</string>
     <string name="unknown">осталось изучить</string>
-
     <string name="word1">слов</string>
     <string name="word2">слово</string>
     <string name="word3">слова</string>
@@ -36,25 +22,45 @@
     <string name="pract3">тренировки</string>
     <string name="err">ОШИБКА</string>
 
+
     <string name="search">Поиск</string>
     <string name="del_word_in_dict_my_dict">удалить слово из словаря</string>
     <string name="add_word_in_dict">добавить слово в словарь</string>
+
+
     <string name="word_rus">слово:</string>
     <string name="word_eng">перевод:</string>
     <string name="rus">слово на английском</string>
     <string name="eng">слово на русском</string>
     <string name="group">группа</string>
 
+
     <string name="practice_text">тренировать слова из словоря:</string>
     <string name="practice_go_text">НАЧАТЬ</string>
     <string name="is_little_word">в словаре нет слов</string>
+
+
     <string name="bad_practice">Плохо</string>
     <string name="notbad__practice">Неплохо</string>
     <string name="good__practice">Отлично</string>
     <string name="beast_practice">Превосходно</string>
     <string name="you_answer_text">,\n ты ответил на:</string>
-    <string name="back_to_menu">вернуться в меню</string>
     <string name="practice_again">пройти тренировку ещё раз</string>
+    <string name="back_to_menu">вернуться в меню</string>
+
+
+    <string-array name="type">
+        <item>выбор: слово - перевод</item>
+        <item>выбор: перевод - слово</item>
+        <item>выбор: прослушивание</item>
+        <item>граматика: прослушивание</item>
+    </string-array>
+
+    <string name="word_translate_select">выбор: слово - перевод</string>
+    <string name="translate_word_select">выбор: перевод - слово</string>
+    <string name="listen_select">выбор: прослушивание</string>
+    <string name="listen_grammar">граматика: прослушивание</string>
+
 
     <string-array name="group">
         <item>все</item>
@@ -62,14 +68,6 @@
         <item>компютер</item>
         <item>программирование</item>
         <item>интернет</item>
-    </string-array>
-
-    <string-array name="type">
-        <item>рандом</item>
-        <item>выбор: слово - перевод</item>
-        <item>выбор: перевод - слово</item>
-        <!--<item>граматика: слово - перевод</item>
-        <item>граматика: перевод - слово</item>-->
     </string-array>
 
     <string-array name="group_my_dict">
@@ -83,6 +81,19 @@
         <item>хорошо выученые</item>
         <item>превосходно выученые</item>
     </string-array>
+
+    <string name="useful_verbs">полезные глаголы</string>
+    <string name="computer">компютер</string>
+    <string name="programming">программирование</string>
+    <string name="net">интернет</string>
+    <string name="unknown_word">не выученые</string>
+    <string name="bad_know_word">плохо выученые</string>
+    <string name="good_know_word">хорошо выученые</string>
+    <string name="the_best_know_word">превосходно выученые</string>
+    <string name="unknown_word_text">не выучено</string>
+    <string name="bad_know_word_text">плохо выучено</string>
+    <string name="good_know_word_text">хорошо выучено</string>
+    <string name="the_best_know_word_text">превосходно выучено</string>
 
     <string-array name="dict">
         <item>﻿to back up (backup) ; выполнять резервное копирование;useful_verb;1</item>

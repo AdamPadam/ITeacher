@@ -3,7 +3,9 @@ package com.itecher.adampadam.itecher.practice;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -45,13 +47,21 @@ public class PracticeActivity extends AppCompatActivity {
 
                 String[] choose = getResources().getStringArray(R.array.type);
 
-                if (choose[selectedItemPosition].equals(getResources().getString(R.string.word_translate))) {
+                if (choose[selectedItemPosition].equals(getResources().getString(R.string.word_translate_select))) {
 
                     type_number = 1;
 
-                } else if (choose[selectedItemPosition].equals(getResources().getString(R.string.translate_word))) {
+                } else if (choose[selectedItemPosition].equals(getResources().getString(R.string.translate_word_select))) {
 
                     type_number = 2;
+
+                } else if (choose[selectedItemPosition].equals(getResources().getString(R.string.listen_select))) {
+
+                    type_number = 3;
+
+                } else if (choose[selectedItemPosition].equals(getResources().getString(R.string.listen_grammar))) {
+
+                    type_number = 4;
 
                 } else {
 
@@ -106,13 +116,34 @@ public class PracticeActivity extends AppCompatActivity {
         });
 
         go.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
 
                 if ((dictdbh.get_word_from_db(db)).size() >= 1) {
 
-                    if (!BeginPracticeActivity.first_begin) BeginPracticeActivity.update();
-                    startActivity(new Intent(context, BeginPracticeActivity.class));
+                    if (type_number == 2 || type_number == 1 || type_number == 0) {
+
+                        if (!SelectWordActivity.first_begin) SelectWordActivity.update();
+                        startActivity(new Intent(context, SelectWordActivity.class));
+
+                    } else if (type_number == 3) {
+
+                        if (!SelectListenActivity.first_begin) {
+                            SelectListenActivity.update();
+                            SelectListenActivity.speaker.speak((SelectListenActivity.list.get(SelectListenActivity.right_answer)).getEng_word());
+                        }
+                        startActivity(new Intent(context, SelectListenActivity.class));
+
+                    } else if (type_number == 4) {
+
+                        if (!GrammarListenActivity.first_begin) {
+                            GrammarListenActivity.update();
+                            GrammarListenActivity.speaker.speak(GrammarListenActivity.right_answer.getEng_word());
+                        }
+                        startActivity(new Intent(context, GrammarListenActivity.class));
+
+                    }
 
                 } else {
 
@@ -122,15 +153,6 @@ public class PracticeActivity extends AppCompatActivity {
 
             }
         });
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
     }
 
