@@ -13,6 +13,7 @@ public class Speaker implements TextToSpeech.OnInitListener {
     private static TextToSpeech engine;
     private static final double pitch = 1.1;
     private static final double speed = 0.7;
+    private Context context;
 
     public Speaker(Context context) {
 
@@ -22,8 +23,6 @@ public class Speaker implements TextToSpeech.OnInitListener {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public static void speak(String s) {
-        engine.setPitch((float) pitch);
-        engine.setSpeechRate((float) speed);
         engine.speak(s, TextToSpeech.QUEUE_FLUSH, null, null);
     }
 
@@ -33,7 +32,11 @@ public class Speaker implements TextToSpeech.OnInitListener {
 
         if (status == TextToSpeech.SUCCESS) {
             Log.d("Speech", "Success!");
-            engine.setLanguage(Locale.ENGLISH);
+            engine.setEngineByPackageName("com.svox.pico");
+            engine.setLanguage(Locale.US);
+            engine.setPitch((float) pitch);
+            engine.setSpeechRate((float) speed);
         }
     }
+
 }

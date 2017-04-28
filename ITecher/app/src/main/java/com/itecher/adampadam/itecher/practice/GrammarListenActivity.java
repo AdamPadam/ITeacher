@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,7 +21,6 @@ import com.itecher.adampadam.itecher.adapter.Word;
 import com.itecher.adampadam.itecher.data.DictDbHelper;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 public class GrammarListenActivity extends AppCompatActivity {
@@ -40,8 +38,8 @@ public class GrammarListenActivity extends AppCompatActivity {
     protected static Word right_answer;
     private static int right_answer_number;
     public static boolean first_begin = true;
-    private static int MAX_ID = 167;
     protected static Speaker speaker;
+    private static int x = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -49,6 +47,7 @@ public class GrammarListenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grammar_listen);
         context = getApplicationContext();
+        speaker = new Speaker(context);
         back = (ImageButton) findViewById(R.id.back_btn);
         question = (ImageButton) findViewById(R.id.audio_grammar);
         right = (TextView) findViewById(R.id.right);
@@ -58,7 +57,6 @@ public class GrammarListenActivity extends AppCompatActivity {
 
         dictdbh = new DictDbHelper(context);
         db = dictdbh.getReadableDatabase();
-        speaker = new Speaker(context);
 
         list_learn_word = dictdbh.get_word_from_db(db);
 
@@ -66,25 +64,25 @@ public class GrammarListenActivity extends AppCompatActivity {
             update();
         }
 
-        speaker.speak(right_answer.getEng_word());
-
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 ok.setClickable(false);
-                ok.setVisibility(view.INVISIBLE);
-                right.setVisibility(view.VISIBLE);
-                next.setVisibility(view.VISIBLE);
+                ok.setVisibility(View.INVISIBLE);
+                right.setVisibility(View.VISIBLE);
+                next.setVisibility(View.VISIBLE);
                 next.setClickable(true);
-                answer.setClickable(false);
+                answer.setActivated(false);
 
                 String s = right_answer.getEng_word();
                 s = s.toLowerCase();
 
                 char[] c = s.toCharArray();
 
-                if (c[c.length - 1] == ' ') {
+                while (c[c.length - 1] == ' ') {
+
+                    c = s.toCharArray();
 
                     s = "";
 
@@ -96,7 +94,7 @@ public class GrammarListenActivity extends AppCompatActivity {
 
                 }
 
-                if (s.equals(answer.getText().toString())) {
+                if (s.equals(((answer.getText()).toString()).toLowerCase())) {
 
                     right.setBackgroundColor(getResources().getColor(R.color.green));
                     right.setText(getResources().getString(R.string.right));
@@ -120,9 +118,11 @@ public class GrammarListenActivity extends AppCompatActivity {
             }
         });
 
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
                 list_learn_word = dictdbh.get_word_from_db(db);
                 MainActivity.isBack = true;
@@ -132,6 +132,17 @@ public class GrammarListenActivity extends AppCompatActivity {
 
             }
         });
+
+        question.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View view) {
+
+                speaker.speak(right_answer.getEng_word());
+
+            }
+        });
+
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,20 +158,9 @@ public class GrammarListenActivity extends AppCompatActivity {
             }
         });
 
-        question.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onClick(View view) {
-
-                speaker.speak(right_answer.getEng_word());
-
-            }
-        });
-
     }
 
     private static ArrayList<Word> fillData(ArrayList<Word> list, int b) {
-
         ArrayList<Word> list2 = new ArrayList<Word>();
 
         for (int i = 0; i < list.size(); i++) {
@@ -201,8 +201,9 @@ public class GrammarListenActivity extends AppCompatActivity {
     public static void update() {
 
         ok.setClickable(true);
+        ok.setVisibility(View.VISIBLE);
         next.setClickable(false);
-        answer.setClickable(true);
+        answer.setActivated(true);
         answer.setText("");
 
         if (list_learn_word.size() < 1) end();
@@ -217,12 +218,16 @@ public class GrammarListenActivity extends AppCompatActivity {
 
         list_learn_word = fillData(list_learn_word, PracticeActivity.group_number);
 
-        speaker.speak(right_answer.getEng_word());
+        if (list_learn_word.size() < (dictdbh.get_word_from_db(db).size()) - x) {
+
+            speaker.speak(right_answer.getEng_word());
+            x = 1;
+
+        }
 
     }
 
     private static void end() {
-
         ProfileActivity.PracticeCount++;
         list_learn_word = dictdbh.get_word_from_db(db);
         if (!EndPracticeActivity.first_end) EndPracticeActivity.update();

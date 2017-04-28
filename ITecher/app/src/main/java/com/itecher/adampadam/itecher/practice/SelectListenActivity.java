@@ -44,6 +44,7 @@ public class SelectListenActivity extends AppCompatActivity {
     public static boolean first_begin = true;
     private static int MAX_ID = 167;
     protected static Speaker speaker;
+    private static int x = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -51,6 +52,7 @@ public class SelectListenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_listen);
         context = getApplicationContext();
+        speaker = new Speaker(context);
         back = (ImageButton) findViewById(R.id.back_btn);
         question = (ImageButton) findViewById(R.id.audio_select);
         right = (TextView) findViewById(R.id.right);
@@ -62,14 +64,12 @@ public class SelectListenActivity extends AppCompatActivity {
 
         dictdbh = new DictDbHelper(context);
         db = dictdbh.getReadableDatabase();
-        speaker = new Speaker(context);
 
         list_learn_word = dictdbh.get_word_from_db(db);
         list_all_word = getAllWord();
 
         if (first_begin) {
             update();
-            speaker.speak((list.get(right_answer)).getEng_word());
         }
 
         answer1.setOnClickListener(new View.OnClickListener() {
@@ -188,7 +188,6 @@ public class SelectListenActivity extends AppCompatActivity {
                 }
 
                 dictdbh.update_word_from_db(db, list.get(right_answer));
-
             }
         });
 
@@ -337,7 +336,6 @@ public class SelectListenActivity extends AppCompatActivity {
                 answer3.setBackgroundColor(getResources().getColor(R.color.dark_white));
                 answer4.setBackgroundColor(getResources().getColor(R.color.dark_white));
                 update();
-                speaker.speak((list.get(right_answer)).getEng_word());
 
             }
         });
@@ -509,6 +507,13 @@ public class SelectListenActivity extends AppCompatActivity {
         answer2.setText((list.get(1)).getEng_word());
         answer3.setText((list.get(2)).getEng_word());
         answer4.setText((list.get(3)).getEng_word());
+
+        if (list_learn_word.size() < (dictdbh.get_word_from_db(db).size()) - x) {
+
+            speaker.speak((list.get(right_answer)).getEng_word());
+            x = 1;
+
+        }
 
         Log.d("mLog", "");
         Log.d("mLog", "");

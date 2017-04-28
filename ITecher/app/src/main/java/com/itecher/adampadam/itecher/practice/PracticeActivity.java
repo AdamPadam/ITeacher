@@ -7,8 +7,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -132,14 +132,18 @@ public class PracticeActivity extends AppCompatActivity {
                         if (!SelectListenActivity.first_begin) {
                             SelectListenActivity.update();
                             SelectListenActivity.speaker.speak((SelectListenActivity.list.get(SelectListenActivity.right_answer)).getEng_word());
+                            Log.d("sound", "------------------------должен быть звук 1/1-------------------------------------");
                         }
                         startActivity(new Intent(context, SelectListenActivity.class));
 
                     } else if (type_number == 4) {
 
+
+
                         if (!GrammarListenActivity.first_begin) {
                             GrammarListenActivity.update();
                             GrammarListenActivity.speaker.speak(GrammarListenActivity.right_answer.getEng_word());
+                            Log.d("sound", "------------------------должен быть звук 1/1-------------------------------------");
                         }
                         startActivity(new Intent(context, GrammarListenActivity.class));
 
