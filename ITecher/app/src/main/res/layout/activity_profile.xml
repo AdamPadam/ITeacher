@@ -9,91 +9,85 @@
     android:orientation="vertical"
     tools:context="com.itecher.adampadam.itecher.ProfileActivity">
 
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:text="@string/know_word"
+            android:textColor="@color/text"
+            android:textSize="25dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/know_word"
-                android:textColor="@color/text"
-                android:textSize="25dp" />
+        <com.filippudak.ProgressPieView.ProgressPieView
+            android:id="@+id/count_word_pie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            ppv:ppvBackgroundColor="@color/white"
+            ppv:ppvProgressColor="@color/primary"
+            ppv:ppvStrokeColor="@color/primary_dark" />
 
-            <com.filippudak.ProgressPieView.ProgressPieView
-                android:id="@+id/count_word_pie"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                ppv:ppvBackgroundColor="@color/white"
-                ppv:ppvProgressColor="@color/primary"
-                ppv:ppvStrokeColor="@color/primary_dark" />
+    </LinearLayout>
 
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:text="@string/right_answer_in_practice"
+            android:textColor="@color/text"
+            android:textSize="25dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/right_answer_in_practice"
-                android:textColor="@color/text"
-                android:textSize="25dp" />
+        <com.filippudak.ProgressPieView.ProgressPieView
+            android:id="@+id/count_right_answer_pie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            ppv:ppvBackgroundColor="@color/white"
+            ppv:ppvProgressColor="@color/primary_red"
+            ppv:ppvStrokeColor="@color/primary_red_dark" />
 
-            <com.filippudak.ProgressPieView.ProgressPieView
-                android:id="@+id/count_right_answer_pie"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                ppv:ppvBackgroundColor="@color/white"
-                ppv:ppvProgressColor="@color/primary_red"
-                ppv:ppvStrokeColor="@color/primary_red_dark" />
+    </LinearLayout>
 
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:text="@string/good_practice"
+            android:textColor="@color/text"
+            android:textSize="25dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/good_practice"
-                android:textColor="@color/text"
-                android:textSize="25dp" />
+        <com.filippudak.ProgressPieView.ProgressPieView
+            android:id="@+id/count_good_practice_pie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            ppv:ppvBackgroundColor="@color/white"
+            ppv:ppvProgressColor="@color/primary_blue"
+            ppv:ppvStrokeColor="@color/primary_blue_dark" />
 
-            <com.filippudak.ProgressPieView.ProgressPieView
-                android:id="@+id/count_good_practice_pie"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                ppv:ppvBackgroundColor="@color/white"
-                ppv:ppvProgressColor="@color/primary_blue"
-                ppv:ppvStrokeColor="@color/primary_blue_dark" />
-
-        </LinearLayout>
-
-    </TableLayout>
+    </LinearLayout>
 
 </LinearLayout>
