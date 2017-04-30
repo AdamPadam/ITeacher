@@ -107,7 +107,7 @@ public class GrammarListenActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                list_learn_word = fillData(mydictdbh.get_word_from_db(mydb), PracticeActivity.group_number);
+                list_learn_word = mydictdbh.get_word_from_db(mydb);
                 MainActivity.isBack = true;
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -199,9 +199,9 @@ public class GrammarListenActivity extends AppCompatActivity {
 
         list_learn_word.remove(right_answer);
 
-        list_learn_word = fillData(mydictdbh.get_word_from_db(mydb), PracticeActivity.group_number);
+        list_learn_word = fillData(list_learn_word, PracticeActivity.group_number);
 
-        if (list_learn_word.size() < (mydictdbh.get_word_from_db(mydb).size()) - x) {
+        if (list_learn_word.size() < ((fillData(mydictdbh.get_word_from_db(mydb), PracticeActivity.group_number)).size()) - x) {
 
             speaker.speak(right_answer.getEng_word());
             x = 1;
@@ -211,7 +211,7 @@ public class GrammarListenActivity extends AppCompatActivity {
     }
 
     private static void end() {
-        list_learn_word = fillData(mydictdbh.get_word_from_db(mydb), PracticeActivity.group_number);
+        list_learn_word = mydictdbh.get_word_from_db(mydb);
         if (!EndPracticeActivity.first_end) EndPracticeActivity.update();
         Intent intent = new Intent(context, EndPracticeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

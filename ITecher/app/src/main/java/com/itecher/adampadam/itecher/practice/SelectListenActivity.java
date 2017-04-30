@@ -335,7 +335,7 @@ public class SelectListenActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                list_learn_word = fillData(mydictdbh.get_word_from_db(mydb), PracticeActivity.group_number);
+                list_learn_word = mydictdbh.get_word_from_db(mydb);
                 list_all_word = dictdbh.get_word_from_db(db);
                 MainActivity.isBack = true;
                 Intent intent = new Intent(context, MainActivity.class);
@@ -482,7 +482,7 @@ public class SelectListenActivity extends AppCompatActivity {
 
         if (list_learn_word.size() < 1) end();
 
-        list_learn_word = fillData(mydictdbh.get_word_from_db(mydb), PracticeActivity.group_number);
+        list_learn_word = fillData(list_learn_word, PracticeActivity.group_number);
         list = get4Words();
 
         answer1.setText((list.get(0)).getEng_word());
@@ -490,7 +490,7 @@ public class SelectListenActivity extends AppCompatActivity {
         answer3.setText((list.get(2)).getEng_word());
         answer4.setText((list.get(3)).getEng_word());
 
-        if (list_learn_word.size() < (mydictdbh.get_word_from_db(mydb).size()) - x) {
+        if (list_learn_word.size() < ((fillData(mydictdbh.get_word_from_db(mydb), PracticeActivity.group_number)).size()) - x) {
 
             speaker.speak((list.get(right_answer)).getEng_word());
             x = 1;
@@ -516,7 +516,7 @@ public class SelectListenActivity extends AppCompatActivity {
 
     private static void end() {
 
-        list_learn_word = fillData(mydictdbh.get_word_from_db(mydb), PracticeActivity.group_number);
+        list_learn_word = mydictdbh.get_word_from_db(mydb);
         list_all_word = dictdbh.get_word_from_db(db);
         if (!EndPracticeActivity.first_end) EndPracticeActivity.update();
         Intent intent = new Intent(context, EndPracticeActivity.class);

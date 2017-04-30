@@ -42,6 +42,7 @@ public class SelectWordActivity extends AppCompatActivity {
     private static int right_answer;
     private static ArrayList<Word> list;
     public static boolean first_begin = true;
+    private static int MAX_ID = 167;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -330,7 +331,7 @@ public class SelectWordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                list_learn_word = fillData(mydictdbh.get_word_from_db(mydb), PracticeActivity.group_number);
+                list_learn_word = mydictdbh.get_word_from_db(mydb);
                 list_all_word = dictdbh.get_word_from_db(db);
                 MainActivity.isBack = true;
                 Intent intent = new Intent(context, MainActivity.class);
@@ -466,7 +467,7 @@ public class SelectWordActivity extends AppCompatActivity {
 
         if (list_learn_word.size() < 1) end();
 
-        list_learn_word = fillData(mydictdbh.get_word_from_db(mydb), PracticeActivity.group_number);
+        list_learn_word = fillData(list_learn_word, PracticeActivity.group_number);
         list = get4Words();
 
         if (PracticeActivity.type_number == 1) {
@@ -527,7 +528,7 @@ public class SelectWordActivity extends AppCompatActivity {
 
     private static void end() {
 
-        list_learn_word = fillData(mydictdbh.get_word_from_db(mydb), PracticeActivity.group_number);
+        list_learn_word = mydictdbh.get_word_from_db(mydb);
         list_all_word = dictdbh.get_word_from_db(db);
         if (!EndPracticeActivity.first_end) EndPracticeActivity.update();
         Intent intent = new Intent(context, EndPracticeActivity.class);
