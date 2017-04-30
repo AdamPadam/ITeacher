@@ -1,63 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_practice_end"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
     tools:context="com.itecher.adampadam.itecher.practice.EndPracticeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_btn"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/status"
+            android:id="@+id/status_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="30dp"
             android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:text=""
-            android:textColor="@color/black"
+            android:textColor="@color/text"
             android:textSize="40dp" />
 
         <TextView
-            android:id="@+id/count"
+            android:id="@+id/count_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:text=""
-            android:textColor="@color/black"
+            android:textColor="@color/text"
             android:textSize="70dp" />
-
-        <Button
-            android:id="@+id/go_end_btn"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/back_to_menu" />
-
-
-        <Button
-            android:id="@+id/go_again_btn"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/practice_again" />
 
     </LinearLayout>
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/go_end_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/round_btn"
+        android:gravity="center"
+        android:text="@string/back_to_menu"
+        android:textColor="@color/text" />
+
+
+    <Button
+        android:id="@+id/go_again_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_btn"
+        android:gravity="center"
+        android:text="@string/practice_again"
+        android:textColor="@color/text" />
+
+</LinearLayout>

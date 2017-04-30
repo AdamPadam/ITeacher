@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -15,7 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.itecher.adampadam.itecher.R;
-import com.itecher.adampadam.itecher.data.DictDbHelper;
+import com.itecher.adampadam.itecher.data.mydict.MyDictDbHelper;
 
 public class PracticeActivity extends AppCompatActivity {
 
@@ -25,20 +24,20 @@ public class PracticeActivity extends AppCompatActivity {
     private Context context;
     public static int group_number = 0;
     public static int type_number = 0;
-    private static DictDbHelper dictdbh;
-    private static SQLiteDatabase db;
+    private static MyDictDbHelper mydictdbh;
+    private static SQLiteDatabase mydb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice);
 
-        group = (Spinner) findViewById(R.id.group_practice);
-        type = (Spinner) findViewById(R.id.type_practice);
-        go = (Button) findViewById(R.id.go_practice);
+        group = (Spinner) findViewById(R.id.group_practice_sp);
+        type = (Spinner) findViewById(R.id.type_practice_sp);
+        go = (Button) findViewById(R.id.go_practice_btn);
         context = getApplicationContext();
-        dictdbh = new DictDbHelper(context);
-        db = dictdbh.getReadableDatabase();
+        mydictdbh = new MyDictDbHelper(context);
+        mydb = mydictdbh.getReadableDatabase();
 
         type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -82,7 +81,7 @@ public class PracticeActivity extends AppCompatActivity {
         group.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View itemSelected, int selectedItemPosition, long selectedId) {
 
-                String[] choose = getResources().getStringArray(R.array.group_my_dict);
+                String[] choose = getResources().getStringArray(R.array.group_not_all);
 
                 if (choose[selectedItemPosition].equals(getResources().getString(R.string.useful_verbs))) {
 
@@ -120,7 +119,7 @@ public class PracticeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if ((dictdbh.get_word_from_db(db)).size() >= 1) {
+                if ((mydictdbh.get_word_from_db(mydb)).size() >= 1) {
 
                     if (type_number == 2 || type_number == 1 || type_number == 0) {
 
@@ -132,18 +131,15 @@ public class PracticeActivity extends AppCompatActivity {
                         if (!SelectListenActivity.first_begin) {
                             SelectListenActivity.update();
                             SelectListenActivity.speaker.speak((SelectListenActivity.list.get(SelectListenActivity.right_answer)).getEng_word());
-                            Log.d("sound", "------------------------должен быть звук 1/1-------------------------------------");
                         }
                         startActivity(new Intent(context, SelectListenActivity.class));
 
                     } else if (type_number == 4) {
 
 
-
                         if (!GrammarListenActivity.first_begin) {
                             GrammarListenActivity.update();
                             GrammarListenActivity.speaker.speak(GrammarListenActivity.right_answer.getEng_word());
-                            Log.d("sound", "------------------------должен быть звук 1/1-------------------------------------");
                         }
                         startActivity(new Intent(context, GrammarListenActivity.class));
 

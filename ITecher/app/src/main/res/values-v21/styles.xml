@@ -3,8 +3,15 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorAccent">@color/primary_orange</item>
+        <item name="android:colorForeground">@color/light_black</item>
+        <item name="android:textColorPrimary">@color/text</item>
+        <item name="android:statusBarColor">@color/primary_dark</item>
+        <item name="android:textColorSecondary">@color/dark_white</item>
+        <item name="android:windowBackground">@color/background</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -15,5 +22,10 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="MyCheckBox" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/primary</item>
+        <item name="colorControlActivated">@color/primary_orange</item>
+    </style>
 
 </resources>

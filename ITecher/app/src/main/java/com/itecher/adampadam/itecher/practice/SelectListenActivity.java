@@ -18,7 +18,8 @@ import com.itecher.adampadam.itecher.ProfileActivity;
 import com.itecher.adampadam.itecher.R;
 import com.itecher.adampadam.itecher.adapter.Speaker;
 import com.itecher.adampadam.itecher.adapter.Word;
-import com.itecher.adampadam.itecher.data.DictDbHelper;
+import com.itecher.adampadam.itecher.data.dict.DictDbHelper;
+import com.itecher.adampadam.itecher.data.mydict.MyDictDbHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,12 +38,13 @@ public class SelectListenActivity extends AppCompatActivity {
     private static Button next;
     public static ArrayList<Word> list_all_word;
     public static ArrayList<Word> list_learn_word;
+    protected static MyDictDbHelper mydictdbh;
+    protected static SQLiteDatabase mydb;
     protected static DictDbHelper dictdbh;
     protected static SQLiteDatabase db;
     protected static int right_answer;
     protected static ArrayList<Word> list;
     public static boolean first_begin = true;
-    private static int MAX_ID = 167;
     protected static Speaker speaker;
     private static int x = 0;
 
@@ -53,20 +55,22 @@ public class SelectListenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_listen);
         context = getApplicationContext();
         speaker = new Speaker(context);
-        back = (ImageButton) findViewById(R.id.back_btn);
-        question = (ImageButton) findViewById(R.id.audio_select);
-        right = (TextView) findViewById(R.id.right);
+        back = (ImageButton) findViewById(R.id.back_sl_imgbtn);
+        question = (ImageButton) findViewById(R.id.audio_imgbtn);
+        right = (TextView) findViewById(R.id.right_tv);
         answer1 = (Button) findViewById(R.id.answer_1_btn);
         answer2 = (Button) findViewById(R.id.answer_2_btn);
         answer3 = (Button) findViewById(R.id.answer_3_btn);
         answer4 = (Button) findViewById(R.id.answer_4_btn);
-        next = (Button) findViewById(R.id.next);
+        next = (Button) findViewById(R.id.next_btn);
 
+        mydictdbh = new MyDictDbHelper(context);
+        mydb = mydictdbh.getReadableDatabase();
         dictdbh = new DictDbHelper(context);
         db = dictdbh.getReadableDatabase();
 
-        list_learn_word = dictdbh.get_word_from_db(db);
-        list_all_word = getAllWord();
+        list_learn_word = fillData(mydictdbh.get_word_from_db(mydb), PracticeActivity.group_number);
+        list_all_word = dictdbh.get_word_from_db(db);
 
         if (first_begin) {
             update();
@@ -86,48 +90,52 @@ public class SelectListenActivity extends AppCompatActivity {
                 if (right_answer == 0) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() + 1);
-                    answer1.setBackgroundColor(getResources().getColor(R.color.green));
+                    answer1.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
                     right.setText(getResources().getString(R.string.right));
-                    right.setBackgroundColor(getResources().getColor(R.color.green));
+                    right.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
                     EndPracticeActivity.all_word_number++;
                     EndPracticeActivity.right_word_number++;
+                    ProfileActivity.answer_p_good++;
 
                 } else if (right_answer == 1) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel());
-                    answer1.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer2.setBackgroundColor(getResources().getColor(R.color.green));
-                    answer3.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer4.setBackgroundColor(getResources().getColor(R.color.red));
+                    answer1.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer2.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
+                    answer3.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer4.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     right.setText(getResources().getString(R.string.not_right));
-                    right.setBackgroundColor(getResources().getColor(R.color.red));
+                    right.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     EndPracticeActivity.all_word_number++;
+                    ProfileActivity.answer_p_bad++;
 
                 } else if (right_answer == 2) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() - 1);
-                    answer1.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer2.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer3.setBackgroundColor(getResources().getColor(R.color.green));
-                    answer4.setBackgroundColor(getResources().getColor(R.color.red));
+                    answer1.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer2.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer3.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
+                    answer4.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     right.setText(getResources().getString(R.string.not_right));
-                    right.setBackgroundColor(getResources().getColor(R.color.red));
+                    right.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     EndPracticeActivity.all_word_number++;
+                    ProfileActivity.answer_p_bad++;
 
                 } else {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() - 1);
-                    answer1.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer2.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer3.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer4.setBackgroundColor(getResources().getColor(R.color.green));
+                    answer1.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer2.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer3.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer4.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
                     right.setText(getResources().getString(R.string.not_right));
-                    right.setBackgroundColor(getResources().getColor(R.color.red));
+                    right.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     EndPracticeActivity.all_word_number++;
+                    ProfileActivity.answer_p_bad++;
 
                 }
 
-                dictdbh.update_word_from_db(db, list.get(right_answer));
+                mydictdbh.update_word_from_db(mydb, list.get(right_answer));
 
             }
         });
@@ -146,48 +154,52 @@ public class SelectListenActivity extends AppCompatActivity {
                 if (right_answer == 0) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() - 1);
-                    answer1.setBackgroundColor(getResources().getColor(R.color.green));
-                    answer2.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer3.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer4.setBackgroundColor(getResources().getColor(R.color.red));
+                    answer1.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
+                    answer2.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer3.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer4.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     right.setText(getResources().getString(R.string.not_right));
-                    right.setBackgroundColor(getResources().getColor(R.color.red));
+                    right.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     EndPracticeActivity.all_word_number++;
+                    ProfileActivity.answer_p_bad++;
 
                 } else if (right_answer == 1) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() + 1);
-                    answer2.setBackgroundColor(getResources().getColor(R.color.green));
+                    answer2.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
                     right.setText(getResources().getString(R.string.right));
-                    right.setBackgroundColor(getResources().getColor(R.color.green));
+                    right.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
                     EndPracticeActivity.all_word_number++;
                     EndPracticeActivity.right_word_number++;
+                    ProfileActivity.answer_p_good++;
 
                 } else if (right_answer == 2) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() - 1);
-                    answer1.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer2.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer3.setBackgroundColor(getResources().getColor(R.color.green));
-                    answer4.setBackgroundColor(getResources().getColor(R.color.red));
+                    answer1.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer2.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer3.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
+                    answer4.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     right.setText(getResources().getString(R.string.not_right));
-                    right.setBackgroundColor(getResources().getColor(R.color.red));
+                    right.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     EndPracticeActivity.all_word_number++;
+                    ProfileActivity.answer_p_bad++;
 
                 } else {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() - 1);
-                    answer1.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer2.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer3.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer4.setBackgroundColor(getResources().getColor(R.color.green));
+                    answer1.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer2.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer3.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer4.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
                     right.setText(getResources().getString(R.string.not_right));
-                    right.setBackgroundColor(getResources().getColor(R.color.red));
+                    right.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     EndPracticeActivity.all_word_number++;
+                    ProfileActivity.answer_p_bad++;
 
                 }
 
-                dictdbh.update_word_from_db(db, list.get(right_answer));
+                mydictdbh.update_word_from_db(mydb, list.get(right_answer));
             }
         });
 
@@ -205,48 +217,52 @@ public class SelectListenActivity extends AppCompatActivity {
                 if (right_answer == 0) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() - 1);
-                    answer1.setBackgroundColor(getResources().getColor(R.color.green));
-                    answer2.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer3.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer4.setBackgroundColor(getResources().getColor(R.color.red));
+                    answer1.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
+                    answer2.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer3.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer4.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     right.setText(getResources().getString(R.string.not_right));
-                    right.setBackgroundColor(getResources().getColor(R.color.red));
+                    right.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     EndPracticeActivity.all_word_number++;
+                    ProfileActivity.answer_p_bad++;
 
                 } else if (right_answer == 1) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() - 1);
-                    answer1.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer2.setBackgroundColor(getResources().getColor(R.color.green));
-                    answer3.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer4.setBackgroundColor(getResources().getColor(R.color.red));
+                    answer1.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer2.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
+                    answer3.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer4.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     right.setText(getResources().getString(R.string.not_right));
-                    right.setBackgroundColor(getResources().getColor(R.color.red));
+                    right.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     EndPracticeActivity.all_word_number++;
+                    ProfileActivity.answer_p_bad++;
 
                 } else if (right_answer == 2) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() + 1);
-                    answer3.setBackgroundColor(getResources().getColor(R.color.green));
+                    answer3.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
                     right.setText(getResources().getString(R.string.right));
-                    right.setBackgroundColor(getResources().getColor(R.color.green));
+                    right.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
                     EndPracticeActivity.all_word_number++;
                     EndPracticeActivity.right_word_number++;
+                    ProfileActivity.answer_p_good++;
 
                 } else {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() - 1);
-                    answer1.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer2.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer3.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer4.setBackgroundColor(getResources().getColor(R.color.green));
+                    answer1.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer2.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer3.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer4.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
                     right.setText(getResources().getString(R.string.not_right));
-                    right.setBackgroundColor(getResources().getColor(R.color.red));
+                    right.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     EndPracticeActivity.all_word_number++;
+                    ProfileActivity.answer_p_bad++;
 
                 }
 
-                dictdbh.update_word_from_db(db, list.get(right_answer));
+                mydictdbh.update_word_from_db(mydb, list.get(right_answer));
 
             }
         });
@@ -265,48 +281,52 @@ public class SelectListenActivity extends AppCompatActivity {
                 if (right_answer == 0) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() - 1);
-                    answer1.setBackgroundColor(getResources().getColor(R.color.green));
-                    answer2.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer3.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer4.setBackgroundColor(getResources().getColor(R.color.red));
+                    answer1.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
+                    answer2.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer3.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer4.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     right.setText(getResources().getString(R.string.not_right));
-                    right.setBackgroundColor(getResources().getColor(R.color.red));
+                    right.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     EndPracticeActivity.all_word_number++;
+                    ProfileActivity.answer_p_bad++;
 
                 } else if (right_answer == 1) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() - 1);
-                    answer1.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer2.setBackgroundColor(getResources().getColor(R.color.green));
-                    answer3.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer4.setBackgroundColor(getResources().getColor(R.color.red));
+                    answer1.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer2.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
+                    answer3.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer4.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     right.setText(getResources().getString(R.string.not_right));
-                    right.setBackgroundColor(getResources().getColor(R.color.red));
+                    right.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     EndPracticeActivity.all_word_number++;
+                    ProfileActivity.answer_p_bad++;
 
                 } else if (right_answer == 2) {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() - 1);
-                    answer1.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer2.setBackgroundColor(getResources().getColor(R.color.red));
-                    answer3.setBackgroundColor(getResources().getColor(R.color.green));
-                    answer4.setBackgroundColor(getResources().getColor(R.color.red));
+                    answer1.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer2.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    answer3.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
+                    answer4.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     right.setText(getResources().getString(R.string.not_right));
-                    right.setBackgroundColor(getResources().getColor(R.color.red));
+                    right.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
                     EndPracticeActivity.all_word_number++;
+                    ProfileActivity.answer_p_bad++;
 
                 } else {
 
                     (list.get(right_answer)).setLevel((list.get(right_answer)).getLevel() + 1);
-                    answer4.setBackgroundColor(getResources().getColor(R.color.green));
+                    answer4.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
                     right.setText(getResources().getString(R.string.right));
-                    right.setBackgroundColor(getResources().getColor(R.color.green));
+                    right.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
                     EndPracticeActivity.all_word_number++;
                     EndPracticeActivity.right_word_number++;
+                    ProfileActivity.answer_p_good++;
 
                 }
 
-                dictdbh.update_word_from_db(db, list.get(right_answer));
+                mydictdbh.update_word_from_db(mydb, list.get(right_answer));
 
             }
         });
@@ -315,8 +335,8 @@ public class SelectListenActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                list_learn_word = dictdbh.get_word_from_db(db);
-                list_all_word = getAllWord();
+                list_learn_word = fillData(mydictdbh.get_word_from_db(mydb), PracticeActivity.group_number);
+                list_all_word = dictdbh.get_word_from_db(db);
                 MainActivity.isBack = true;
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -331,10 +351,10 @@ public class SelectListenActivity extends AppCompatActivity {
 
                 right.setVisibility(view.INVISIBLE);
                 next.setVisibility(view.INVISIBLE);
-                answer1.setBackgroundColor(getResources().getColor(R.color.dark_white));
-                answer2.setBackgroundColor(getResources().getColor(R.color.dark_white));
-                answer3.setBackgroundColor(getResources().getColor(R.color.dark_white));
-                answer4.setBackgroundColor(getResources().getColor(R.color.dark_white));
+                answer1.setBackground(getResources().getDrawable(R.drawable.round_btn));
+                answer2.setBackground(getResources().getDrawable(R.drawable.round_btn));
+                answer3.setBackground(getResources().getDrawable(R.drawable.round_btn));
+                answer4.setBackground(getResources().getDrawable(R.drawable.round_btn));
                 update();
 
             }
@@ -349,44 +369,6 @@ public class SelectListenActivity extends AppCompatActivity {
 
             }
         });
-
-    }
-
-    public static ArrayList<Word> getAllWord() {
-
-        ArrayList<Word> word = new ArrayList<Word>();
-
-        String[] list = context.getResources().getStringArray(R.array.dict);
-
-        for (int i = 0; i < MAX_ID; i++) {
-
-            String[] s = list[i].split(";");
-
-            if (Integer.valueOf(s[3]) == 1) {
-
-                word.add(new Word(false, s[0], s[1], "полезные глаголы", i + 1));
-
-            } else if (Integer.valueOf(s[3]) == 2) {
-
-                word.add(new Word(false, s[0], s[1], "компютер", i + 1));
-
-            } else if (Integer.valueOf(s[3]) == 3) {
-
-                word.add(new Word(false, s[0], s[1], "программирование", i + 1));
-
-            } else if (Integer.valueOf(s[3]) == 4) {
-
-                word.add(new Word(false, s[0], s[1], "интернет", i + 1));
-
-            } else if (Integer.valueOf(s[3]) == 4) {
-
-                word.add(new Word(false, s[0], s[1], "ОШИБКА", i + 1));
-
-            }
-
-        }
-
-        return word;
 
     }
 
@@ -500,7 +482,7 @@ public class SelectListenActivity extends AppCompatActivity {
 
         if (list_learn_word.size() < 1) end();
 
-        list_learn_word = fillData(list_learn_word, PracticeActivity.group_number);
+        list_learn_word = fillData(mydictdbh.get_word_from_db(mydb), PracticeActivity.group_number);
         list = get4Words();
 
         answer1.setText((list.get(0)).getEng_word());
@@ -508,7 +490,7 @@ public class SelectListenActivity extends AppCompatActivity {
         answer3.setText((list.get(2)).getEng_word());
         answer4.setText((list.get(3)).getEng_word());
 
-        if (list_learn_word.size() < (dictdbh.get_word_from_db(db).size()) - x) {
+        if (list_learn_word.size() < (mydictdbh.get_word_from_db(mydb).size()) - x) {
 
             speaker.speak((list.get(right_answer)).getEng_word());
             x = 1;
@@ -534,9 +516,8 @@ public class SelectListenActivity extends AppCompatActivity {
 
     private static void end() {
 
-        ProfileActivity.PracticeCount++;
-        list_learn_word = dictdbh.get_word_from_db(db);
-        list_all_word = getAllWord();
+        list_learn_word = fillData(mydictdbh.get_word_from_db(mydb), PracticeActivity.group_number);
+        list_all_word = dictdbh.get_word_from_db(db);
         if (!EndPracticeActivity.first_end) EndPracticeActivity.update();
         Intent intent = new Intent(context, EndPracticeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

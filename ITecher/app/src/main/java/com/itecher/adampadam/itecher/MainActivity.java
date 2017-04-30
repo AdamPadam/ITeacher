@@ -68,7 +68,7 @@ public class MainActivity extends ActivityGroup {
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
 
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);

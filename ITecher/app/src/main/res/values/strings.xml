@@ -1,26 +1,12 @@
 <resources>
 
     <string name="app_name">ITecher</string>
-    <string name="title_activity_settings">SettingsActivity</string>
-    <string name="title_activity_practice">PracticeActivity</string>
 
-    <string name="random">рандом</string>
+
     <string name="begin">начать</string>
     <string name="right">верно</string>
     <string name="not_right">неверно</string>
     <string name="right_answer_text">", правельный ответ: "</string>
-
-
-    <string name="know">изучаем</string>
-    <string name="practice">пройдено</string>
-    <string name="unknown">осталось изучить</string>
-    <string name="word1">слов</string>
-    <string name="word2">слово</string>
-    <string name="word3">слова</string>
-    <string name="pract1">тренировок</string>
-    <string name="pract2">тренировка</string>
-    <string name="pract3">тренировки</string>
-    <string name="err">ОШИБКА</string>
 
 
     <string name="search">Поиск</string>
@@ -32,12 +18,16 @@
     <string name="word_eng">перевод:</string>
     <string name="rus">слово на английском</string>
     <string name="eng">слово на русском</string>
-    <string name="group">группа</string>
+    <string name="knowlegy">степень изучености</string>
+    <string name="group_word">группа слов</string>
+    <string name="abbrev">(абревиатура)</string>
 
 
     <string name="practice_text">тренировать слова из словоря:</string>
     <string name="practice_go_text">НАЧАТЬ</string>
     <string name="is_little_word">в словаре нет слов</string>
+    <string name="ok">OK</string>
+    <string name="next_question">следующий вопрос</string>
 
 
     <string name="bad_practice">Плохо</string>
@@ -56,13 +46,7 @@
         <item>граматика: прослушивание</item>
     </string-array>
 
-    <string name="word_translate_select">выбор: слово - перевод</string>
-    <string name="translate_word_select">выбор: перевод - слово</string>
-    <string name="listen_select">выбор: прослушивание</string>
-    <string name="listen_grammar">граматика: прослушивание</string>
-
-
-    <string-array name="group">
+    <string-array name="group_not_all">
         <item>все</item>
         <item>полезные глаголы</item>
         <item>компютер</item>
@@ -70,7 +54,12 @@
         <item>интернет</item>
     </string-array>
 
-    <string-array name="group_my_dict">
+    <string name="word_translate_select">выбор: слово - перевод</string>
+    <string name="translate_word_select">выбор: перевод - слово</string>
+    <string name="listen_select">выбор: прослушивание</string>
+    <string name="listen_grammar">граматика: прослушивание</string>
+
+    <string-array name="group">
         <item>все</item>
         <item>полезные глаголы</item>
         <item>компютер</item>
@@ -90,184 +79,198 @@
     <string name="bad_know_word">плохо выученые</string>
     <string name="good_know_word">хорошо выученые</string>
     <string name="the_best_know_word">превосходно выученые</string>
+
+
+    <string name="null_text">NULL</string>
     <string name="unknown_word_text">не выучено</string>
     <string name="bad_know_word_text">плохо выучено</string>
     <string name="good_know_word_text">хорошо выучено</string>
     <string name="the_best_know_word_text">превосходно выучено</string>
 
+
+    <string name="all_word">все слова изучены</string>
+    <string name="not_errors">вы пока не разу не ошиблись</string>
+    <string name="all_practice_good">все тренировки прошли успешно</string>
+    <string name="good_practice">хорошо пройденые тренировки</string>
+    <string name="know_word">изучаемые слова</string>
+    <string name="right_answer_in_practice">правильных ответов в тренировках</string>
+
+
     <string-array name="dict">
-        <item>﻿to back up (backup) ; выполнять резервное копирование;useful_verb;1</item>
-        <item>to boot ; загружать, загружаться (например, об устройстве или операционной системе);useful_verb;1</item>
-        <item>to burn ; записывать на оптический диск;useful_verb;1</item>
-        <item>to create ; создавать;useful_verb;1</item>
-        <item>to compile ; компилировать;useful_verb;1</item>
-        <item>to compress ; сжимать (например, архиватором);useful_verb;1</item>
-        <item>to connect ; соединять, подключаться;useful_verb;1</item>
-        <item>to copy ; копировать;useful_verb;1</item>
-        <item>to cut ; вырезать в буфер обмена;useful_verb;1</item>
-        <item>to debug ; отлаживать;useful_verb;1</item>
-        <item>to decrypt ; расшифровывать;useful_verb;1</item>
-        <item>to delete ; удалять;useful_verb;1</item>
-        <item>to deploy ; развертывать (например, приложение на сервере);useful_verb;1</item>
-        <item>to develop ; разрабатывать;useful_verb;1</item>
-        <item>to disable ; отключать, деактивировать;useful_verb;1</item>
-        <item>to disconnect ; разъединять, отключаться;useful_verb;1</item>
-        <item>to display ; отображать;useful_verb;1</item>
-        <item>to download ; загружать, скачивать;useful_verb;1</item>
-        <item>to eject ; извлекать (устройство);useful_verb;1</item>
-        <item>to enable ; включать, активировать;useful_verb;1</item>
-        <item>to encrypt ; шифровать, зашифровывать;useful_verb;1</item>
-        <item>to execute ; исполнять;useful_verb;1</item>
-        <item>to format ; форматировать;useful_verb;1</item>
-        <item>to implement ; внедрять, реализовывать;useful_verb;1</item>
-        <item>to initialize ; приводить в исходное состояние, инициализировать;useful_verb;1</item>
-        <item>to install ; инсталлировать, устанавливать;useful_verb;1</item>
-        <item>to integrate ; интегрировать, объединять в одну систему;useful_verb;1</item>
-        <item>to link to ; ссылаться на что-либо;useful_verb;1</item>
-        <item>to load ; загружать;useful_verb;1</item>
-        <item>to paste ; вставлять из буфера обмена;useful_verb;1</item>
-        <item>to plug in ; подключать;useful_verb;1</item>
-        <item>to press (a button) ; нажимать (кнопку);useful_verb;1</item>
-        <item>to read ; считывать;useful_verb;1</item>
-        <item>to reboot ; перезагружать, перезагружаться;useful_verb;1</item>
-        <item>to restore ; восстанавливать;useful_verb;1</item>
-        <item>to save ; сохранять;useful_verb;1</item>
-        <item>to scroll up/down ; прокручивать вверх/вниз (например, веб-страницу);useful_verb;1</item>
-        <item>to sort ; сортировать;useful_verb;1</item>
-        <item>to switch on/off ; включать/выключать;useful_verb;1</item>
-        <item>to uninstall ; деинсталлировать, удалять;useful_verb;1</item>
-        <item>to update ; обновлять;useful_verb;1</item>
-        <item>to upgrade ; улучшать, модернизировать;useful_verb;1</item>
-        <item>to upload ; загружать, закачивать;useful_verb;1</item>
-        <item>to verify ; проверять;useful_verb;1</item>
-        <item>Hardware ; аппаратное обеспечение Слово/Словосочетание Перевод;computer;2</item>
-        <item>a bus ; шина;computer;2</item>
-        <item>a cable ; кабель;computer;2</item>
-        <item>a central - processing unit (CPU); центральный процессор;computer;2</item>
-        <item>a computer  case ; корпус системного блока;computer;2</item>
-        <item>a device ; устройство;computer;2</item>
-        <item>a fan ; вентилятор охлаждения, кулер;computer;2</item>
-        <item>a graphics card (display card, display adapter, graphics adapter) ; видеокарта (графический адаптер);computer;2</item>
-        <item>a graphics processing unit (GPU) ; графический процессор;computer;2</item>
-        <item>a hard disk drive (HDD) ; жесткий диск;computer;2</item>
-        <item>a laptop ; ноутбук, портативный компьютер;computer;2</item>
-        <item>a light; светодиод;computer;2</item>
-        <item>a motherboard (mainboard) ; материнская плата;computer;2</item>
-        <item>a network card ; сетевой адаптер (сетевая карта, сетевая плата);computer;2</item>
-        <item>a port ; разъем, порт;computer;2</item>
-        <item>a power supply unit (PSU) ; блок питания;computer;2</item>
-        <item>a solid - state drive (SSD) ; твердотельный накопитель;computer;2</item>
-        <item>a sound card (audio card) ; звуковая карта;computer;2</item>
-        <item>a storage device ; запоминающее устройство, накопитель;computer;2</item>
-        <item>a touch screen ; сенсорный экран;computer;2</item>
-        <item>air cooling ; воздушное охлаждение;computer;2</item>
-        <item>an expansion card ; карта (плата) расширения;computer;2</item>
-        <item>an optical disk drive ; оптический привод;computer;2</item>
-        <item>an uninterruptible power source (UPS) ; источник бесперебойного питания;computer;2</item>
-        <item>random - access memory (RAM) ; оперативная память (ОЗУ);computer;2</item>
-        <item>read - only memory (ROM) ; постоянное запоминающее устройство (ПЗУ);computer;2</item>
-        <item>removable media ; съемные носители информации;computer;2</item>
-        <item>water cooling ; водяное охлаждение;computer;2</item>
-        <item>output devices; устройства вывода;computer;2</item>
-        <item>a monitor;монитор;computer;2</item>
-        <item>a printer;принтер;computer;2</item>
-        <item>a speaker;колонка (акустическая);computer;2</item>
-        <item>headphones ;наушники;computer;2</item>
-        <item>input devices; устройства ввода;computer;2</item>
-        <item>a keyboard;клавиатура;computer;2</item>
-        <item>a mouse;мышь;computer;2</item>
-        <item>a scanner;сканер ;computer;2</item>
-        <item>a digital camera;цифровая камера;computer;2</item>
-        <item>a joystick;джойстик;computer;2</item>
-        <item>Software ; программное обеспечение;programing;3</item>
-        <item>a compiler ; компилятор;programing;3</item>
-        <item>a database ; база данных;programing;3</item>
-        <item>a debugger ; отладчик;programing;3</item>
-        <item>a desktop application/app ; приложение для настольного компьютера;programing;3</item>
-        <item>a device driver ; драйвер устройства;programing;3</item>
-        <item>a graphical user interface (GUI) ; графический пользовательский интерфейс;programing;3</item>
-        <item>a kernel ; ядро (например, операционной системы);programing;3</item>
-        <item>a mobile application/app ; мобильное приложение;programing;3</item>
-        <item>a plug - in (plugin) ; плагин, расширение, дополнительный программный модуль;programing;3</item>
-        <item>a programming language ; язык программирования;programing;3</item>
-        <item>a query ; запрос;programing;3</item>
-        <item>a scroll bar ; полоса прокрутки;programing;3</item>
-        <item>a snapshot ; снимок состояния системы;programing;3</item>
-        <item>a spreadsheet ; электронная таблица;programing;3</item>
-        <item>a status bar ; строка состояния;programing;3</item>
-        <item>a template ; шаблон;programing;3</item>
-        <item>a version control system (VCS) ; система контроля версий;programing;3</item>
-        <item>a web application/app ; веб - приложение;programing;3</item>
-        <item>a word processor ; текстовый процессор;programing;3</item>
-        <item>a text editor ; текстовый редактор;programing;3</item>
-        <item>a utility ; утилита (служебная программа);programing;3</item>
-        <item>acceptance testing ; приемочное тестирование;programing;3</item>
-        <item>agile methodology ; гибкая методология разработки;programing;3</item>
-        <item>an algorithm ; алгоритм;programing;3</item>
-        <item>an array ; массив;programing;3</item>
-        <item>an encoding ; кодировка;programing;3</item>
-        <item>an enterprise application ; корпоративное приложение;programing;3</item>
-        <item>an executable (file) ; исполняемый файл;programing;3</item>
-        <item>an interpreter ; интерпретатор;programing;3</item>
-        <item>an operating system (OS) ; операционная система;programing;3</item>
-        <item>application software ; прикладное программное обеспечение;programing;3</item>
-        <item>aspect - oriented programming (AOP) ; аспектно - ориентированное программирование;programing;3</item>
-        <item>binary data ; двоичные данные;programing;3</item>
-        <item>commercial software ; платное программное обеспечение;programing;3</item>
-        <item>data ; данные, информация;programing;3</item>
-        <item>data processing ; обработка данных;programing;3</item>
-        <item>extreme programming ; экстремальное программирование;programing;3</item>
-        <item>firmware ; прошивка, микропрограмма;programing;3</item>
-        <item>freeware ; бесплатное программное обеспечение;programing;3</item>
-        <item>incremental development ; инкрементная модель разработки;programing;3</item>
-        <item>integrated development environment (IDE) ; интегрированная среда разработки;programing;3</item>
-        <item>iterative development ; итеративная модель разработки;programing;3</item>
-        <item>malicious software (malware) ; вредоносное программное обеспечение;programing;3</item>
-        <item>object - oriented programming (OOP) ; объектно - ориентированное программирование;programing;3</item>
-        <item>open source software ; программное обеспечение с открытым исходным кодом;programing;3</item>
-        <item>prototyping ; создание прототипа, прототипирование;programing;3</item>
-        <item>rapid application development (RAD) ; быстрая разработка приложений (методология);programing;3</item>
-        <item>regression testing ; регрессионное тестирование;programing;3</item>
-        <item>runtime (runtime environment) ; среда выполнения кода;programing;3</item>
-        <item>server software ; серверное программное обеспечение;programing;3</item>
-        <item>spiral development ; спиральная модель разработки;programing;3</item>
-        <item>spyware ; программа - шпион, шпионское программное обеспечение;programing;3</item>
-        <item>system software ; системное программное обеспечение;programing;3</item>
-        <item>unit testing ; модульное (блочное, компонентное) тестирование;programing;3</item>
-        <item>waterfall model ; каскадная модель разработки;programing;3</item>
-        <item>Internet ; Интернет;net;4</item>
-        <item>a bookmark ; закладка (в браузере);net;4</item>
-        <item>a bridge ; мост;net;4</item>
-        <item>a browser ; браузер, обозреватель;net;4</item>
-        <item>a domain ; домен;net;4</item>
-        <item>a firewall ; брандмауэр, межсетевой экран;net;4</item>
-        <item>a gateway ; шлюз;net;4</item>
-        <item>a hyperlink ; гиперссылка;net;4</item>
-        <item>a node ; узел сети;net;4</item>
-        <item>a packet ; пакет;net;4</item>
-        <item>a patch cord ; коммутационный кабель, патч - корд;net;4</item>
-        <item>a router ; маршрутизатор, роутер;net;4</item>
-        <item>a search engine ; поисковая система;net;4</item>
-        <item>a subdomain ; поддомен, субдомен;net;4</item>
-        <item>a switch ; коммутатор, свитч;net;4</item>
-        <item>a website ; веб - сайт, веб - узел;net;4</item>
-        <item>a wireless network ; беспроводная сеть;net;4</item>
-        <item>bandwidth ; пропускная способность (канала передачи данных);net;4</item>
-        <item>broadband ; широкополосный доступ в Интернет;net;4</item>
-        <item>client - server architecture ; клиент - серверная архитектура;net;4</item>
-        <item>cloud computing ; облачные вычисления;net;4</item>
-        <item>cloud storage ; облачное хранилище данных;net;4</item>
-        <item>dynamic host configuration protocol (DHCP) ; протокол динамической настройки узла;net;4</item>
-        <item>domain name system (DNS) ; система доменных имен;net;4</item>
-        <item>instant messaging (IM) ; обмен мгновенными сообщениями;net;4</item>
-        <item>Internet service provider (ISP) ; интернет - провайдер;net;4</item>
-        <item>local area network (LAN) ; локальная сеть;net;4</item>
-        <item>latency ; задержка, период ожидания;net;4</item>
-        <item>media access control - (MAC) address  ; аппаратный адрес, MAC - адрес;net;4</item>
-        <item>peer-to-peer (P2P) ; одноранговая сеть, пиринговая сеть;net;4</item>
-        <item>twisted pair ; витая пара;net;4</item>
-        <item>voice over IP (VoIP) ; голосовая связь через Интернет, IP - телефония;net;4</item>
-        <item>wide area network (WAN) ; глобальная сеть, широкомасштабная сеть ;net;4</item>
+        <item>﻿﻿1;to back up;NULL;выполнять резервное копирование;NULL;1</item>
+        <item>﻿2;to boot;NULL;загружаться;NULL;1</item>
+        <item>﻿3;to burn;NULL;записывать на оптический диск;NULL;1</item>
+        <item>﻿4;to create;NULL;создавать;NULL;1</item>
+        <item>﻿5;to compile;NULL;компиsлировать;NULL;1</item>
+        <item>﻿6;to compress;NULL;сжимать;NULL;1</item>
+        <item>﻿7;to connect;NULL;подключаться;NULL;1</item>
+        <item>﻿8;to copy;NULL;копировать;NULL;1</item>
+        <item>﻿9;to cut;NULL;вырезать в буфер обмена;NULL;1</item>
+        <item>﻿10;to debug;NULL;отлаживать;NULL;1</item>
+        <item>﻿11;to decrypt;NULL;расшифровывать;NULL;1</item>
+        <item>﻿12;to delete;NULL;удалять;NULL;1</item>
+        <item>﻿13;to deploy;NULL;развертывать;NULL;1</item>
+        <item>﻿14;to develop;NULL;разрабатывать;NULL;1</item>
+        <item>﻿15;to disable;NULL;отключать;NULL;1</item>
+        <item>﻿16;to disconnect;NULL;отключаться;NULL;1</item>
+        <item>﻿17;to display;NULL;отображать;NULL;1</item>
+        <item>﻿18;to download;NULL;скачивать;NULL;1</item>
+        <item>﻿19;to eject;NULL;извлекать;NULL;1</item>
+        <item>﻿20;to enable;NULL;включать;NULL;1</item>
+        <item>﻿21;to encrypt;NULL;шифровать;NULL;1</item>
+        <item>﻿22;to execute;NULL;исполнять;NULL;1</item>
+        <item>﻿23;to format;NULL;форматировать;NULL;1</item>
+        <item>﻿24;to implement;NULL;реализовывать;NULL;1</item>
+        <item>﻿25;to initialize;NULL;инициализировать;NULL;1</item>
+        <item>﻿26;to install;NULL;устанавливать;NULL;1</item>
+        <item>﻿27;to integrate;NULL;интегрировать;NULL;1</item>
+        <item>﻿28;to link to;NULL;ссылаться на что-либо;NULL;1</item>
+        <item>﻿29;to load;NULL;загружать;NULL;1</item>
+        <item>﻿30;to paste;NULL;вставлять из буфера обмена;NULL;1</item>
+        <item>﻿31;to plug in;NULL;подключать;NULL;1</item>
+        <item>﻿32;to press;NULL;нажимать;NULL;1</item>
+        <item>﻿33;to read;NULL;считывать;NULL;1</item>
+        <item>﻿34;to reboot;NULL;перезагружать;NULL;1</item>
+        <item>﻿35;to restore;NULL;восстанавливать;NULL;1</item>
+        <item>﻿36;to save;NULL;сохранять;NULL;1</item>
+        <item>﻿37;to scroll up;NULL;прокручивать вверх;NULL;1</item>
+        <item>﻿38;to scroll down;NULL;прокручивать вниз;NULL;1</item>
+        <item>﻿39;to sort;NULL;сортировать;NULL;1</item>
+        <item>﻿40;to switch on;NULL;включать;NULL;1</item>
+        <item>﻿41;to switch off;NULL;выключать;NULL;1</item>
+        <item>﻿42;to uninstall;NULL;удалять;NULL;1</item>
+        <item>﻿43;to update;NULL;обновлять;NULL;1</item>
+        <item>﻿44;to upgrade;NULL;улучшать;NULL;1</item>
+        <item>﻿45;to upload;NULL;загружать;NULL;1</item>
+        <item>﻿46;to verify;NULL;проверять;NULL;1</item>
+        <item>﻿47;Hardware;NULL;аппаратное обеспечение;NULL;2</item>
+        <item>﻿48;a bus;NULL;шина;NULL;2</item>
+        <item>﻿49;a cable;NULL;кабель;NULL;2</item>
+        <item>﻿50;a central processing unit;CPU;центральный процессор;ЦП;2</item>
+        <item>﻿51;a computer  case;NULL;корпус системного блока;NULL;2</item>
+        <item>﻿52;a device;NULL;устройство;NULL;2</item>
+        <item>﻿53;a fan;NULL;кулер;NULL;2</item>
+        <item>﻿54;a graphics card;NULL;видеокарта;NULL;2</item>
+        <item>﻿55;a graphics processing unit;GPU;графический процессор;NULL;2</item>
+        <item>﻿56;a hard disk drive;HDD;жесткий диск;NULL;2</item>
+        <item>﻿57;a laptop;NULL;ноутбук;NULL;2</item>
+        <item>﻿58;a light;NULL;светодиод;NULL;2</item>
+        <item>﻿59;a motherboard;NULL;материнская плата;NULL;2</item>
+        <item>﻿60;a network card;NULL;сетевой адаптер;NULL;2</item>
+        <item>﻿61;a port;NULL;разъем;NULL;2</item>
+        <item>﻿62;a power supply unit;PSU;блок питания;БП;2</item>
+        <item>﻿63;a solid - state drive;SSD;твердотельный накопитель;NULL;2</item>
+        <item>﻿64;a sound card;NULL;звуковая карта;NULL;2</item>
+        <item>﻿65;a storage device;NULL;запоминающее устройство;NULL;2</item>
+        <item>﻿66;a touch screen;NULL;сенсорный экран;NULL;2</item>
+        <item>﻿67;air cooling;NULL;воздушное охлаждение;NULL;2</item>
+        <item>﻿68;an expansion card;NULL;плата расширения;NULL;2</item>
+        <item>﻿69;an optical disk drive;NULL;оптический привод;NULL;2</item>
+        <item>﻿70;an uninterruptible power source;UPS;источник бесперебойного питания;ИБП;2</item>
+        <item>﻿71;random access memory;RAM;оперативная память;ОЗУ;2</item>
+        <item>﻿72;read only memory;ROM;постоянное запоминающее устройство;ПЗУ;2</item>
+        <item>﻿73;removable media;NULL;съемные носители информации;NULL;2</item>
+        <item>﻿74;water cooling;NULL;водяное охлаждение;NULL;2</item>
+        <item>﻿75;output devices;NULL;устройства вывода;NULL;2</item>
+        <item>﻿76;a monitor;NULL;монитор;NULL;2</item>
+        <item>﻿77;a printer;NULL;принтер;NULL;2</item>
+        <item>﻿78;a speaker;NULL;колонка;NULL;2</item>
+        <item>﻿79;headphones;NULL;наушники;NULL;2</item>
+        <item>﻿80;input devices;NULL;устройства ввода;NULL;2</item>
+        <item>﻿81;a keyboard;NULL;клавиатура;NULL;2</item>
+        <item>﻿82;a mouse;NULL;мышь;NULL;2</item>
+        <item>﻿83;a scanner;NULL;сканер;NULL;2</item>
+        <item>﻿84;a digital camera;NULL;цифровая камера;NULL;2</item>
+        <item>﻿85;a joystick;NULL;джойстик;NULL;2</item>
+        <item>﻿86;Software;NULL;программное обеспечение;NULL;3</item>
+        <item>﻿87;a compiler;NULL;компилятор;NULL;3</item>
+        <item>﻿88;a database;DB;база данных;БД;3</item>
+        <item>﻿89;a debugger;NULL;отладчик;NULL;3</item>
+        <item>﻿90;a desktop application;NULL;приложение для настольного компьютера;NULL;3</item>
+        <item>﻿91;a device driver;NULL;драйвер устройства;NULL;3</item>
+        <item>﻿92;a graphical user interface;GUI;графический пользовательский интерфейс;NULL;3</item>
+        <item>﻿93;a kernel;NULL;ядро;NULL;3</item>
+        <item>﻿94;a mobile application;NULL;мобильное приложение;NULL;3</item>
+        <item>﻿95;a plug in;NULL;плагин;NULL;3</item>
+        <item>﻿96;a programming language;NULL;язык программирования;NULL;3</item>
+        <item>﻿97;a query;NULL;запрос;NULL;3</item>
+        <item>﻿98;a scroll bar;NULL;полоса прокрутки;NULL;3</item>
+        <item>﻿99;a snapshot;NULL;снимок состояния системы;NULL;3</item>
+        <item>﻿100;a spreadsheet;NULL;электронная таблица;NULL;3</item>
+        <item>﻿101;a status bar;NULL;строка состояния;NULL;3</item>
+        <item>﻿102;a template;NULL;шаблон;NULL;3</item>
+        <item>﻿103;a version control system;VCS;система контроля версий;NULL;3</item>
+        <item>﻿104;a web application;NULL;веб приложение;NULL;3</item>
+        <item>﻿105;a word processor;NULL;текстовый процессор;NULL;3</item>
+        <item>﻿106;a text editor;NULL;текстовый редактор;NULL;3</item>
+        <item>﻿107;a utility;NULL;служебная программа;NULL;3</item>
+        <item>﻿108;acceptance testing;NULL;приемочное тестирование;NULL;3</item>
+        <item>﻿109;agile methodology;NULL;гибкая методология разработки;NULL;3</item>
+        <item>﻿110;an algorithm;NULL;алгоритм;NULL;3</item>
+        <item>﻿111;an array;NULL;массив;NULL;3</item>
+        <item>﻿112;an encoding;NULL;кодировка;NULL;3</item>
+        <item>﻿113;an enterprise application;NULL;корпоративное приложение;NULL;3</item>
+        <item>﻿114;an executable file;NULL;исполняемый файл;NULL;3</item>
+        <item>﻿115;an interpreter;NULL;интерпретатор;NULL;3</item>
+        <item>﻿116;an operating system;OS;операционная система;ОС;3</item>
+        <item>﻿117;application software;NULL;прикладное программное обеспечение;NULL;3</item>
+        <item>﻿118;aspect oriented programming;AOP;аспектно ориентированное программирование;АОП;3</item>
+        <item>﻿119;binary data;NULL;двоичные данные;NULL;3</item>
+        <item>﻿120;commercial software;NULL;платное программное обеспечение;NULL;3</item>
+        <item>﻿121;data;NULL;данные;NULL;3</item>
+        <item>﻿122;data processing;NULL;обработка данных;NULL;3</item>
+        <item>﻿123;extreme programming;NULL;экстремальное программирование;NULL;3</item>
+        <item>﻿124;firmware;NULL;прошивка;NULL;3</item>
+        <item>﻿125;freeware;NULL;бесплатное программное обеспечение;NULL;3</item>
+        <item>﻿126;incremental development;NULL;инкрементная модель разработки;NULL;3</item>
+        <item>﻿127;integrated development environment;IDE;интегрированная среда разработки;NULL;3</item>
+        <item>﻿128;iterative development;NULL;итеративная модель разработки;NULL;3</item>
+        <item>﻿129;malicious software;malware;вредоносное программное обеспечение;NULL;3</item>
+        <item>﻿130;object oriented programming;OOP;объектно ориентированное программирование;ООП;3</item>
+        <item>﻿131;open source software;NULL;программное обеспечение с открытым исходным кодом;NULL;3</item>
+        <item>﻿132;prototyping;NULL;создание прототипа;NULL;3</item>
+        <item>﻿133;rapid application development;RAD;быстрая разработка приложений;NULL;3</item>
+        <item>﻿134;regression testing;NULL;регрессионное тестирование;NULL;3</item>
+        <item>﻿135;runtime environment;NULL;среда выполнения кода;NULL;3</item>
+        <item>﻿136;server software;NULL;серверное программное обеспечение;NULL;3</item>
+        <item>﻿137;spiral development;NULL;спиральная модель разработки;NULL;3</item>
+        <item>﻿138;spyware;NULL;шпионское программное обеспечение;NULL;3</item>
+        <item>﻿139;system software;NULL;системное программное обеспечение;NULL;3</item>
+        <item>﻿140;unit testing;NULL;модульное тестирование;NULL;3</item>
+        <item>﻿141;waterfall model;NULL;каскадная модель разработки;NULL;3</item>
+        <item>﻿142;Internet;NULL;интернет;NULL;4</item>
+        <item>﻿143;a bookmark;NULL;закладка;NULL;4</item>
+        <item>﻿144;a bridge;NULL;мост;NULL;4</item>
+        <item>﻿145;a browser;NULL;браузер;NULL;4</item>
+        <item>﻿146;a domain;NULL;домен;NULL;4</item>
+        <item>﻿147;a firewall;NULL;брандмауэр;NULL;4</item>
+        <item>﻿148;a gateway;NULL;шлюз;NULL;4</item>
+        <item>﻿149;a hyperlink;NULL;гиперссылка;NULL;4</item>
+        <item>﻿150;a node;NULL;узел сети;NULL;4</item>
+        <item>﻿151;a packet;NULL;пакет;NULL;4</item>
+        <item>﻿152;a patch cord;NULL;коммутационный кабель;NULL;4</item>
+        <item>﻿153;a router;NULL;роутер;NULL;4</item>
+        <item>﻿154;a search engine;NULL;поисковая система;NULL;4</item>
+        <item>﻿155;a subdomain;NULL;поддомен;NULL;4</item>
+        <item>﻿156;a switch;NULL;коммутатор;NULL;4</item>
+        <item>﻿157;a website;NULL;сайт;NULL;4</item>
+        <item>﻿158;a wireless network;NULL;беспроводная сеть;NULL;4</item>
+        <item>﻿159;bandwidth;NULL;пропускная способность;NULL;4</item>
+        <item>﻿160;broadband;NULL;широкополосный доступ в Интернет;NULL;4</item>
+        <item>﻿161;client server architecture;NULL;клиент серверная архитектура;NULL;4</item>
+        <item>﻿162;cloud computing;NULL;облачные вычисления;NULL;4</item>
+        <item>﻿163;cloud storage;NULL;облачное хранилище данных;NULL;4</item>
+        <item>﻿164;dynamic host configuration protocol;DHCP;протокол динамической настройки узла;NULL;4</item>
+        <item>﻿165;domain name system;DNS;система доменных имен;NULL;4</item>
+        <item>﻿166;instant messaging;IM;обмен мгновенными сообщениями;NULL;4</item>
+        <item>﻿167;Internet service provider;ISP;интернет провайдер;NULL;4</item>
+        <item>﻿168;local area network;LAN;локальная сеть;NULL;4</item>
+        <item>﻿169;latency;NULL;задержка;NULL;4</item>
+        <item>﻿170;media access control;MAC;аппаратный адрес;NULL;4</item>
+        <item>﻿171;peer-to-peer;P2P;одноранговая сеть;NULL;4</item>
+        <item>﻿172;twisted pair;NULL;витая пара;NULL;4</item>
+        <item>﻿173;voice over IP;VoIP;голосовая связь через Интернет;NULL;4</item>
+        <item>﻿174;wide area network;WAN;глобальная сеть;NULL;4</item>
     </string-array>
 
 </resources>

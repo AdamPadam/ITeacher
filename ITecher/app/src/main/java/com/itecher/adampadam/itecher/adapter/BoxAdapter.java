@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.itecher.adampadam.itecher.R;
@@ -23,6 +24,7 @@ public class BoxAdapter extends BaseAdapter {
     public ArrayList<Word> object;
     public ArrayList<Integer> id_list;
     public boolean isLearn;
+    public LinearLayout body;
 
     public BoxAdapter(Context context, ArrayList<Word> object, boolean learn) {
         this.context = context;
@@ -67,10 +69,52 @@ public class BoxAdapter extends BaseAdapter {
         final Speaker speaker = new Speaker(context);
         final String sp = word.getEng_word();
 
-        ((TextView) view.findViewById(R.id.group)).setText(word.getGroup());
-        ((TextView) view.findViewById(R.id.eng)).setText(word.getEng_word());
-        ((TextView) view.findViewById(R.id.rus)).setText(word.getRus_word());
-        view.findViewById(R.id.listening_btn).setOnClickListener(new View.OnClickListener() {
+        final CheckBox cbAdd = (CheckBox) view.findViewById(R.id.adapter_box_cb);
+
+        body = (LinearLayout) view.findViewById(R.id.adapter_layout);
+        body.setClickable(true);
+        body.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (cbAdd.isChecked()) {
+
+                    cbAdd.setChecked(false);
+
+                } else {
+
+                    cbAdd.setChecked(true);
+
+                }
+
+            }
+        });
+
+        if (word.getEng_abbrev().equals(context.getString(R.string.null_text))) {
+
+            ((TextView) view.findViewById(R.id.adapter_eng_abbrev_tv)).setText("");
+
+        } else {
+
+            ((TextView) view.findViewById(R.id.adapter_eng_abbrev_tv)).setText("(" + word.getEng_abbrev() + ")");
+
+        }
+
+        if (word.getRus_abbrev().equals(context.getString(R.string.null_text))) {
+
+            ((TextView) view.findViewById(R.id.adapter_rus_abbrev_tv)).setText("");
+
+        } else {
+
+            ((TextView) view.findViewById(R.id.adapter_rus_abbrev_tv)).setText("(" + word.getRus_abbrev() + ")");
+
+        }
+
+        ((TextView) view.findViewById(R.id.adapter_eng_word_tv)).setText(word.getEng_word());
+        ((TextView) view.findViewById(R.id.adapter_rus_word_tv)).setText(word.getRus_word());
+        ((TextView) view.findViewById(R.id.adapter_group_tv)).setText(word.getGroup());
+
+        view.findViewById(R.id.adapter_listen_btn).setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
@@ -84,25 +128,24 @@ public class BoxAdapter extends BaseAdapter {
 
             if (word.getLevel() < 10) {
 
-                ((TextView) view.findViewById(R.id.learn)).setText(context.getResources().getString(R.string.unknown_word_text));
+                ((TextView) view.findViewById(R.id.adapter_learn_tv)).setText(context.getResources().getString(R.string.unknown_word_text));
 
             } else if (word.getLevel() >= 10 && word.getLevel() < 15) {
 
-                ((TextView) view.findViewById(R.id.learn)).setText(context.getResources().getString(R.string.bad_know_word_text));
+                ((TextView) view.findViewById(R.id.adapter_learn_tv)).setText(context.getResources().getString(R.string.bad_know_word_text));
 
             } else if (word.getLevel() >= 15 && word.getLevel() < 30) {
 
-                ((TextView) view.findViewById(R.id.learn)).setText(context.getResources().getString(R.string.good_know_word_text));
+                ((TextView) view.findViewById(R.id.adapter_learn_tv)).setText(context.getResources().getString(R.string.good_know_word_text));
 
             } else {
 
-                ((TextView) view.findViewById(R.id.learn)).setText(context.getResources().getString(R.string.the_best_know_word_text));
+                ((TextView) view.findViewById(R.id.adapter_learn_tv)).setText(context.getResources().getString(R.string.the_best_know_word_text));
 
             }
 
         }
 
-        CheckBox cbAdd = (CheckBox) view.findViewById(R.id.box);
         cbAdd.setOnCheckedChangeListener(myCheckedChangList);
         cbAdd.setTag(position);
         cbAdd.setChecked(word.box);

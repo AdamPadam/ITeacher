@@ -4,7 +4,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/background"
     tools:context="com.itecher.adampadam.itecher.MainActivity">
 
     <TabHost
@@ -21,7 +21,7 @@
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"></TabWidget>
+                android:background="@color/primary_dark"></TabWidget>
 
             <FrameLayout
                 android:id="@android:id/tabcontent"
@@ -29,6 +29,7 @@
                 android:layout_height="match_parent" />
 
         </LinearLayout>
+
     </TabHost>
 
 </RelativeLayout>

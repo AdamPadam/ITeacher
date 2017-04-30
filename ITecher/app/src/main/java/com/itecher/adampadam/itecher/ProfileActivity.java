@@ -4,121 +4,132 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.TextView;
+import android.util.Log;
 
-import com.itecher.adampadam.itecher.data.DictDbHelper;
+import com.filippudak.ProgressPieView.ProgressPieView;
+import com.itecher.adampadam.itecher.data.dict.DictDbHelper;
+import com.itecher.adampadam.itecher.data.mydict.MyDictDbHelper;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private static TextView know;
-    private static TextView practice;
-    private static TextView unknown;
-
-    public static int ItemCount = 0;
-    public static int PracticeCount = 0;
-    public static int MAX_ID = 167;
     public static Context context;
-    private static DictDbHelper dictDbHelper;
+    private static MyDictDbHelper mydictdbh;
+    private static SQLiteDatabase mydb;
+    private static DictDbHelper dictdbh;
     private static SQLiteDatabase db;
+
+    private static ProgressPieView pie_word;
+    private static ProgressPieView pie_answer;
+    private static ProgressPieView pie_practice;
+
+    public static int word_p;
+    public static int answer_p_good = 0;
+    public static int answer_p_bad = 0;
+    public static int practice_p_good = 0;
+    public static int practice_p_bad = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        dictDbHelper = new DictDbHelper(getApplicationContext());
-        db = dictDbHelper.getWritableDatabase();
-
-        know = (TextView) findViewById(R.id.know);
-        practice = (TextView) findViewById(R.id.practice);
-        unknown = (TextView) findViewById(R.id.unknown);
-
         context = getApplicationContext();
+
+        mydictdbh = new MyDictDbHelper(context);
+        mydb = mydictdbh.getWritableDatabase();
+        dictdbh = new DictDbHelper(context);
+        db = dictdbh.getWritableDatabase();
+
+        pie_word = (ProgressPieView) findViewById(R.id.count_word_pie);
+
+        pie_word.setOnProgressListener(new ProgressPieView.OnProgressListener() {
+            @Override
+            public void onProgressChanged(int progress, int max) {
+            }
+
+            @Override
+            public void onProgressCompleted() {
+                pie_word.setText(getString(R.string.all_word));
+            }
+        });
+
+
+        pie_answer = (ProgressPieView) findViewById(R.id.count_right_answer_pie);
+
+        pie_word.setOnProgressListener(new ProgressPieView.OnProgressListener() {
+            @Override
+            public void onProgressChanged(int progress, int max) {
+            }
+
+            @Override
+            public void onProgressCompleted() {
+                pie_word.setText(getString(R.string.not_errors));
+            }
+        });
+
+
+        pie_practice = (ProgressPieView) findViewById(R.id.count_good_practice_pie);
+
+        pie_word.setOnProgressListener(new ProgressPieView.OnProgressListener() {
+            @Override
+            public void onProgressChanged(int progress, int max) {
+            }
+
+            @Override
+            public void onProgressCompleted() {
+                pie_word.setText(getString(R.string.all_practice_good));
+            }
+        });
 
         updateProfile();
 
 
     }
 
-    @Override
-    public void onStart(){
-        super.onStart();
-
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-
-    }
-
     public static void updateProfile() {
 
-        ItemCount = (dictDbHelper.get_word_from_db(db)).size();
+        int mydict = mydictdbh.get_word_from_db(mydb).size();
+        int dict = dictdbh.get_word_from_db(db).size();
 
-        know.setText(context.getResources().getString(R.string.know) + "\n" + getKnow() + getEnd(getKnow(), 1));
+        if (mydict + dict == 0 || mydict == 0) {
 
-        practice.setText(context.getResources().getString(R.string.practice) + "\n" + getPractice() + getEnd(getPractice(), 2));
-
-        unknown.setText(context.getResources().getString(R.string.unknown) + "\n" + getUnknown() + getEnd(getUnknown(), 1));
-
-    }
-
-    private static String getEnd(int num, int i) {
-
-        if (i == 1) {
-
-            if ((num % 100 >= 11 && num % 100 <= 14) || (num % 10 >= 5 && num % 10 <= 9) || num % 10 == 0) {
-
-                return " " + context.getResources().getString(R.string.word1);
-
-            } else if (num % 10 == 1) {
-
-                return " " + context.getResources().getString(R.string.word2);
-
-            } else {
-
-                return " " + context.getResources().getString(R.string.word3);
-
-            }
-
-        } else if (i == 2) {
-
-            if ((num % 100 >= 11 && num % 100 <= 14) || (num % 10 >= 5 && num % 10 <= 9) || num % 10 == 0) {
-
-                return " " + context.getResources().getString(R.string.pract1);
-
-            } else if (num % 10 == 1) {
-
-                return " " + context.getResources().getString(R.string.pract2);
-
-            } else {
-
-                return " " + context.getResources().getString(R.string.pract3);
-
-            }
+            pie_word.setProgress(0);
+            pie_word.setText("0%");
 
         } else {
 
-            return " " + context.getResources().getString(R.string.err);
+            word_p = (mydict * 100) / (mydict + dict);
+
+            Log.d("err", "--------------" + dict + "------------------" + mydict + "---------------------" + word_p);
+
+            pie_word.setProgress(word_p);
+            pie_word.setText(word_p + "%");
 
         }
 
-    }
+        if (answer_p_good + answer_p_bad == 0 || answer_p_good == 0) {
 
-    private static int getKnow() {
+            pie_answer.setProgress(0);
+            pie_answer.setText("0%");
 
-        return ItemCount;
+        } else {
 
-    }
+            pie_answer.setProgress((answer_p_good * 100) / (answer_p_good + answer_p_bad));
+            pie_answer.setText((answer_p_good * 100) / (answer_p_good + answer_p_bad) + "%");
 
-    private static int getPractice() {
+        }
 
-        return PracticeCount;
+        if (practice_p_good + practice_p_bad == 0 || practice_p_good == 0) {
 
-    }
+            pie_practice.setProgress(0);
+            pie_practice.setText("0%");
 
-    private static int getUnknown() {
+        } else {
 
-        return MAX_ID - ItemCount;
+            pie_practice.setProgress((practice_p_good * 100) / (practice_p_good + practice_p_bad));
+            pie_practice.setText((practice_p_good * 100) / (practice_p_good + practice_p_bad) + "%");
+
+        }
 
     }
 

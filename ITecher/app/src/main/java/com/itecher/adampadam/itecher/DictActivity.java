@@ -18,7 +18,8 @@ import android.widget.TextView;
 
 import com.itecher.adampadam.itecher.adapter.BoxAdapter;
 import com.itecher.adampadam.itecher.adapter.Word;
-import com.itecher.adampadam.itecher.data.DictDbHelper;
+import com.itecher.adampadam.itecher.data.dict.DictDbHelper;
+import com.itecher.adampadam.itecher.data.mydict.MyDictDbHelper;
 
 import java.util.ArrayList;
 
@@ -31,8 +32,9 @@ public class DictActivity extends AppCompatActivity {
     private static EditText search_et;
     private static ImageButton search_btn;
     private static String search_query;
-    public static final int MAX_ID = 172;
     public static Button add_word;
+    private static MyDictDbHelper mydictdbh;
+    public static SQLiteDatabase mydb;
     private static DictDbHelper dictdbh;
     public static SQLiteDatabase db;
     public static ArrayList<Word> list;
@@ -45,17 +47,19 @@ public class DictActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dict);
 
-        search_et = (EditText) findViewById(R.id.search_edittext);
-        search_btn = (ImageButton) findViewById(R.id.search_btn);
+        search_et = (EditText) findViewById(R.id.search_et);
+        search_btn = (ImageButton) findViewById(R.id.search_imgbtn);
 
-        lvMain = (ListView) findViewById(R.id.lvMain);
-        spinner = (Spinner) findViewById(R.id.spinner);
+        lvMain = (ListView) findViewById(R.id.main_lv);
+        spinner = (Spinner) findViewById(R.id.spinner_sp);
 
+        mydictdbh = new MyDictDbHelper(getApplicationContext());
+        mydb = mydictdbh.getWritableDatabase();
         dictdbh = new DictDbHelper(getApplicationContext());
         db = dictdbh.getWritableDatabase();
 
         context = getApplicationContext();
-        list = getWord_for_list(db);
+        list = dictdbh.get_word_from_db(db);
 
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
@@ -63,7 +67,7 @@ public class DictActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View itemSelected, int selectedItemPosition, long selectedId) {
 
-                list = getWord_for_list(db);
+                list = dictdbh.get_word_from_db(db);
 
                 String[] choose = getResources().getStringArray(R.array.group);
 
@@ -73,7 +77,7 @@ public class DictActivity extends AppCompatActivity {
 
                     fillData(list, 1);
 
-                    boxAdapter = new BoxAdapter(getApplicationContext(), word, false);
+                    boxAdapter = new BoxAdapter(getApplicationContext(), word, true);
                     lvMain.setAdapter(boxAdapter);
 
                 } else if (choose[selectedItemPosition].equals(getResources().getString(R.string.computer))) {
@@ -82,7 +86,7 @@ public class DictActivity extends AppCompatActivity {
 
                     fillData(list, 2);
 
-                    boxAdapter = new BoxAdapter(getApplicationContext(), word, false);
+                    boxAdapter = new BoxAdapter(getApplicationContext(), word, true);
                     lvMain.setAdapter(boxAdapter);
 
                 } else if (choose[selectedItemPosition].equals(getResources().getString(R.string.programming))) {
@@ -91,7 +95,7 @@ public class DictActivity extends AppCompatActivity {
 
                     fillData(list, 3);
 
-                    boxAdapter = new BoxAdapter(getApplicationContext(), word, false);
+                    boxAdapter = new BoxAdapter(getApplicationContext(), word, true);
                     lvMain.setAdapter(boxAdapter);
 
                 } else if (choose[selectedItemPosition].equals(getResources().getString(R.string.net))) {
@@ -100,7 +104,43 @@ public class DictActivity extends AppCompatActivity {
 
                     fillData(list, 4);
 
-                    boxAdapter = new BoxAdapter(getApplicationContext(), word, false);
+                    boxAdapter = new BoxAdapter(getApplicationContext(), word, true);
+                    lvMain.setAdapter(boxAdapter);
+
+                } else if (choose[selectedItemPosition].equals(getResources().getString(R.string.unknown_word))) {
+
+                    word.clear();
+
+                    fillData(list, 5);
+
+                    boxAdapter = new BoxAdapter(getApplicationContext(), word, true);
+                    lvMain.setAdapter(boxAdapter);
+
+                } else if (choose[selectedItemPosition].equals(getResources().getString(R.string.bad_know_word))) {
+
+                    word.clear();
+
+                    fillData(list, 6);
+
+                    boxAdapter = new BoxAdapter(getApplicationContext(), word, true);
+                    lvMain.setAdapter(boxAdapter);
+
+                } else if (choose[selectedItemPosition].equals(getResources().getString(R.string.good_know_word))) {
+
+                    word.clear();
+
+                    fillData(list, 7);
+
+                    boxAdapter = new BoxAdapter(getApplicationContext(), word, true);
+                    lvMain.setAdapter(boxAdapter);
+
+                } else if (choose[selectedItemPosition].equals(getResources().getString(R.string.the_best_know_word))) {
+
+                    word.clear();
+
+                    fillData(list, 8);
+
+                    boxAdapter = new BoxAdapter(getApplicationContext(), word, true);
                     lvMain.setAdapter(boxAdapter);
 
                 } else {
@@ -109,7 +149,7 @@ public class DictActivity extends AppCompatActivity {
 
                     fillData(list, 0);
 
-                    boxAdapter = new BoxAdapter(getApplicationContext(), word, false);
+                    boxAdapter = new BoxAdapter(getApplicationContext(), word, true);
                     lvMain.setAdapter(boxAdapter);
 
                 }
@@ -118,13 +158,13 @@ public class DictActivity extends AppCompatActivity {
 
             public void onNothingSelected(AdapterView<?> parent) {
 
-                list = getWord_for_list(db);
+                list = dictdbh.get_word_from_db(db);
 
                 word.clear();
 
                 fillData(list, 0);
 
-                boxAdapter = new BoxAdapter(getApplicationContext(), word, false);
+                boxAdapter = new BoxAdapter(getApplicationContext(), word, true);
                 lvMain.setAdapter(boxAdapter);
 
             }
@@ -137,7 +177,7 @@ public class DictActivity extends AppCompatActivity {
 
                 InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-                list = getWord_for_list(db);
+                list = dictdbh.get_word_from_db(db);
 
                 search_query = (search_et.getText()).toString();
 
@@ -145,13 +185,13 @@ public class DictActivity extends AppCompatActivity {
 
                 fillData(list, -1);
 
-                boxAdapter = new BoxAdapter(getApplicationContext(), word, false);
+                boxAdapter = new BoxAdapter(getApplicationContext(), word, true);
                 lvMain.setAdapter(boxAdapter);
 
             }
         });
 
-        add_word = (Button) findViewById(R.id.add_word_in_dict);
+        add_word = (Button) findViewById(R.id.add_word_in_dict_btn);
 
         add_word.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,7 +200,8 @@ public class DictActivity extends AppCompatActivity {
                 for (Word w : boxAdapter.getBox()) {
                     if (w.box) {
 
-                        dictdbh.add_word_in_db(db, w);
+                        mydictdbh.add_word_in_db(mydb, w);
+                        dictdbh.del_word_from_db(db, w);
                         w.box = false;
 
                     }
@@ -168,6 +209,8 @@ public class DictActivity extends AppCompatActivity {
                     updateDict();
 
                 }
+
+                ProfileActivity.updateProfile();
 
             }
         });
@@ -179,7 +222,7 @@ public class DictActivity extends AppCompatActivity {
 
                     InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-                    list = getWord_for_list(db);
+                    list = dictdbh.get_word_from_db(db);
 
                     search_query = (search_et.getText()).toString();
 
@@ -187,7 +230,7 @@ public class DictActivity extends AppCompatActivity {
 
                     fillData(list, -1);
 
-                    boxAdapter = new BoxAdapter(getApplicationContext(), word, false);
+                    boxAdapter = new BoxAdapter(getApplicationContext(), word, true);
                     lvMain.setAdapter(boxAdapter);
 
                     return true;
@@ -195,70 +238,6 @@ public class DictActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-    }
-
-    @Override
-    public void onStart(){
-        super.onStart();
-
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-
-    }
-
-    public static ArrayList<Word> getWord_for_list(SQLiteDatabase db) {
-
-        ArrayList<Word> word = new ArrayList<Word>();
-        ArrayList<Word> word_in_dict = dictdbh.get_word_from_db(db);
-
-        String[] list = context.getResources().getStringArray(R.array.dict);
-
-        for (int i = 0; i < MAX_ID; i++) {
-
-            boolean b = true;
-
-            String[] s = list[i].split(";");
-
-            for (Word w : word_in_dict) {
-
-                if ((w.getid() == i + 1)) {
-
-                    b = false;
-
-                }
-
-            }
-
-            if (b) {
-
-                if (Integer.valueOf(s[3]) == 1) {
-
-                    word.add(new Word(false, s[0], s[1], context.getResources().getString(R.string.useful_verbs), i + 1));
-
-                } else if (Integer.valueOf(s[3]) == 2) {
-
-                    word.add(new Word(false, s[0], s[1], context.getResources().getString(R.string.computer), i + 1));
-
-                } else if (Integer.valueOf(s[3]) == 3) {
-
-                    word.add(new Word(false, s[0], s[1], context.getResources().getString(R.string.programming), i + 1));
-
-                } else if (Integer.valueOf(s[3]) == 4) {
-
-                    word.add(new Word(false, s[0], s[1], context.getResources().getString(R.string.net), i + 1));
-
-                } else if (Integer.valueOf(s[3]) == 4) {
-
-                    word.add(new Word(false, s[0], s[1], context.getResources().getString(R.string.err), i + 1));
-
-                }
-
-            }
-
-        }
-
-        return word;
 
     }
 
@@ -293,6 +272,24 @@ public class DictActivity extends AppCompatActivity {
                 if ((((list.get(i)).getEng_word()).contains(search_query)) || (((list.get(i)).getRus_word()).contains(search_query)))
                     word.add(list.get(i));
 
+            } else if (b == 5) {
+
+                if ((list.get(i)).getLevel() < 10) word.add(list.get(i));
+
+            } else if (b == 6) {
+
+                if ((list.get(i)).getLevel() >= 10 && (list.get(i)).getLevel() < 15)
+                    word.add(list.get(i));
+
+            } else if (b == 7) {
+
+                if ((list.get(i)).getLevel() >= 15 && (list.get(i)).getLevel() < 20)
+                    word.add(list.get(i));
+
+            } else if (b == 8) {
+
+                if ((list.get(i)).getLevel() >= 20) word.add(list.get(i));
+
             } else {
 
                 word.add(list.get(i));
@@ -307,7 +304,7 @@ public class DictActivity extends AppCompatActivity {
 
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-        list = getWord_for_list(db);
+        list = dictdbh.get_word_from_db(db);
         word.clear();
         fillData(list, last);
         lvMain.setAdapter(boxAdapter);

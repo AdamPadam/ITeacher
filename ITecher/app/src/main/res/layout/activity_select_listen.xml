@@ -4,6 +4,7 @@
     android:id="@+id/activity_select_listen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context="com.itecher.adampadam.itecher.practice.SelectListenActivity">
 
     <LinearLayout
@@ -12,33 +13,36 @@
         android:orientation="vertical">
 
         <ImageButton
-            android:id="@+id/back_btn"
+            android:id="@+id/back_sl_imgbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/null_color"
             android:src="@mipmap/ic_keyboard_backspace_dark" />
 
         <ImageButton
-            android:id="@+id/audio_select"
+            android:id="@+id/audio_imgbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:background="@color/white"
+
+            android:background="@color/null_color"
+            android:gravity="center"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_volume_high_dark" />
 
         <TextView
-            android:id="@+id/right"
+            android:id="@+id/right_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
-            android:background="@color/red"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:text=""
-            android:textColor="@color/black"
+            android:textColor="@color/text"
             android:textSize="30dp"
             android:textStyle="bold"
             android:visibility="invisible" />
@@ -51,10 +55,10 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="10dp"
-            android:background="@color/dark_white"
-            android:gravity="center_horizontal"
+            android:background="@drawable/round_btn"
+            android:gravity="center"
             android:text=""
-            android:textColor="@color/light_black"
+            android:textColor="@color/text"
             android:textSize="15dp"
             android:textStyle="italic" />
 
@@ -65,10 +69,10 @@
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:background="@color/dark_white"
-            android:gravity="center_horizontal"
+            android:background="@drawable/round_btn"
+            android:gravity="center"
             android:text=""
-            android:textColor="@color/light_black"
+            android:textColor="@color/text"
             android:textSize="15dp"
             android:textStyle="italic" />
 
@@ -79,10 +83,10 @@
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:background="@color/dark_white"
-            android:gravity="center_horizontal"
+            android:background="@drawable/round_btn"
+            android:gravity="center"
             android:text=""
-            android:textColor="@color/light_black"
+            android:textColor="@color/text"
             android:textSize="15dp"
             android:textStyle="italic" />
 
@@ -93,18 +97,21 @@
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:background="@color/dark_white"
-            android:gravity="center_horizontal"
+            android:background="@drawable/round_btn"
+            android:gravity="center"
             android:text=""
-            android:textColor="@color/light_black"
+            android:textColor="@color/text"
             android:textSize="15dp"
             android:textStyle="italic" />
 
         <Button
-            android:id="@+id/next"
+            android:id="@+id/next_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="следующий вопрос"
+            android:background="@drawable/round_btn"
+            android:gravity="center"
+            android:text="@string/next_question"
+            android:textColor="@color/text"
             android:visibility="invisible" />
 
     </LinearLayout>

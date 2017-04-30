@@ -18,7 +18,8 @@ import android.widget.TextView;
 
 import com.itecher.adampadam.itecher.adapter.BoxAdapter;
 import com.itecher.adampadam.itecher.adapter.Word;
-import com.itecher.adampadam.itecher.data.DictDbHelper;
+import com.itecher.adampadam.itecher.data.dict.DictDbHelper;
+import com.itecher.adampadam.itecher.data.mydict.MyDictDbHelper;
 
 import java.util.ArrayList;
 
@@ -27,8 +28,10 @@ public class CardActivity extends AppCompatActivity {
     private Spinner spinner;
     private static ArrayList<Word> word = new ArrayList<Word>();
     private static BoxAdapter boxAdapter;
+    private static MyDictDbHelper mydictdbh;
+    public static SQLiteDatabase mydb;
     private static DictDbHelper dictdbh;
-    private static SQLiteDatabase db;
+    public static SQLiteDatabase db;
     private static ListView lvMain;
     private EditText search_et;
     private ImageButton search_btn;
@@ -49,21 +52,23 @@ public class CardActivity extends AppCompatActivity {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
-        search_et = (EditText) findViewById(R.id.search_edittext_my_dict);
-        search_btn = (ImageButton) findViewById(R.id.search_btn_my_dict);
+        search_et = (EditText) findViewById(R.id.search_edittext_my_dict_et);
+        search_btn = (ImageButton) findViewById(R.id.search_btn_my_dict_imgbtn);
 
-        lvMain = (ListView) findViewById(R.id.lvMain_my_dict);
-        spinner = (Spinner) findViewById(R.id.spinner_my_dict);
+        lvMain = (ListView) findViewById(R.id.main_my_dict_lv);
+        spinner = (Spinner) findViewById(R.id.spinner_my_dict_sp);
 
-        dictdbh = new DictDbHelper(context);
+        mydictdbh = new MyDictDbHelper(getApplicationContext());
+        mydb = mydictdbh.getWritableDatabase();
+        dictdbh = new DictDbHelper(getApplicationContext());
         db = dictdbh.getWritableDatabase();
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View itemSelected, int selectedItemPosition, long selectedId) {
 
-                String[] choose = getResources().getStringArray(R.array.group_my_dict);
+                String[] choose = getResources().getStringArray(R.array.group);
 
-                list_new_word = dictdbh.get_word_from_db(db);
+                list_new_word = mydictdbh.get_word_from_db(mydb);
 
                 if (list_new_word.size() > 0) {
 
@@ -163,7 +168,7 @@ public class CardActivity extends AppCompatActivity {
 
             public void onNothingSelected(AdapterView<?> parent) {
 
-                list_new_word = dictdbh.get_word_from_db(db);
+                list_new_word = mydictdbh.get_word_from_db(mydb);
 
                 if (list_new_word.size() > 0) {
 
@@ -193,7 +198,7 @@ public class CardActivity extends AppCompatActivity {
                 InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
-                list_new_word = dictdbh.get_word_from_db(db);
+                list_new_word = mydictdbh.get_word_from_db(mydb);
 
                 if (list_new_word.size() > 0) {
 
@@ -224,7 +229,7 @@ public class CardActivity extends AppCompatActivity {
                     InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
-                    list_new_word = dictdbh.get_word_from_db(db);
+                    list_new_word = mydictdbh.get_word_from_db(mydb);
 
                     if (list_new_word.size() > 0) {
 
@@ -251,13 +256,13 @@ public class CardActivity extends AppCompatActivity {
             }
         });
 
-        del_word = (Button) findViewById(R.id.del_word_in_dict_my_dict);
+        del_word = (Button) findViewById(R.id.del_word_in_dict_my_dict_btn);
 
         del_word.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                list_new_word = dictdbh.get_word_from_db(db);
+                list_new_word = mydictdbh.get_word_from_db(mydb);
 
                 if (list_new_word.size() > 0) {
 
@@ -265,7 +270,8 @@ public class CardActivity extends AppCompatActivity {
 
                         if (w.box) {
 
-                            dictdbh.del_word_from_db(db, w);
+                            dictdbh.add_word_in_db(db, w);
+                            mydictdbh.del_word_from_db(mydb, w);
                             w.box = false;
 
                         }
@@ -284,17 +290,11 @@ public class CardActivity extends AppCompatActivity {
                     lvMain.setAdapter(boxAdapter);
 
                 }
+
+                ProfileActivity.updateProfile();
+
             }
         });
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
     }
 
@@ -363,7 +363,7 @@ public class CardActivity extends AppCompatActivity {
 
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-        list_new_word = dictdbh.get_word_from_db(db);
+        list_new_word = mydictdbh.get_word_from_db(mydb);
         word.clear();
         fillData(list_new_word, last);
         boxAdapter = new BoxAdapter(context, word, true);

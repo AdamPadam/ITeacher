@@ -13,7 +13,6 @@ public class Speaker implements TextToSpeech.OnInitListener {
     private static TextToSpeech engine;
     private static final double pitch = 1.1;
     private static final double speed = 0.7;
-    private Context context;
 
     public Speaker(Context context) {
 

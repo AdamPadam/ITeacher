@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.itecher.adampadam.itecher.MainActivity;
+import com.itecher.adampadam.itecher.ProfileActivity;
 import com.itecher.adampadam.itecher.R;
 
 public class EndPracticeActivity extends AppCompatActivity {
@@ -32,8 +33,8 @@ public class EndPracticeActivity extends AppCompatActivity {
         context = getApplicationContext();
         go_again = (Button) findViewById(R.id.go_again_btn);
         go_end = (Button) findViewById(R.id.go_end_btn);
-        status = (TextView) findViewById(R.id.status);
-        count = (TextView) findViewById(R.id.count);
+        status = (TextView) findViewById(R.id.status_tv);
+        count = (TextView) findViewById(R.id.count_tv);
 
         if (first_end) {
             update();
@@ -68,12 +69,19 @@ public class EndPracticeActivity extends AppCompatActivity {
 
                 } else if (PracticeActivity.type_number == 3) {
 
-                    if (!SelectListenActivity.first_begin) SelectListenActivity.update();
+                    if (!SelectListenActivity.first_begin) {
+                        SelectListenActivity.update();
+                        SelectListenActivity.speaker.speak((SelectListenActivity.list.get(SelectListenActivity.right_answer)).getEng_word());
+                    }
                     startActivity(new Intent(context, SelectListenActivity.class));
 
                 } else if (PracticeActivity.type_number == 4) {
 
-                    if (!GrammarListenActivity.first_begin) GrammarListenActivity.update();
+
+                    if (!GrammarListenActivity.first_begin) {
+                        GrammarListenActivity.update();
+                        GrammarListenActivity.speaker.speak(GrammarListenActivity.right_answer.getEng_word());
+                    }
                     startActivity(new Intent(context, GrammarListenActivity.class));
 
                 }
@@ -88,6 +96,16 @@ public class EndPracticeActivity extends AppCompatActivity {
         status.setText(getStatus(right_word_number, all_word_number) + context.getString(R.string.you_answer_text));
 
         count.setText(right_word_number + "/" + all_word_number);
+
+        if (right_word_number == all_word_number) {
+
+            ProfileActivity.practice_p_good++;
+
+        } else {
+
+            ProfileActivity.practice_p_bad++;
+
+        }
 
     }
 

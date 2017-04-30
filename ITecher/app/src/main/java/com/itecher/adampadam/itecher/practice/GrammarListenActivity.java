@@ -18,7 +18,7 @@ import com.itecher.adampadam.itecher.ProfileActivity;
 import com.itecher.adampadam.itecher.R;
 import com.itecher.adampadam.itecher.adapter.Speaker;
 import com.itecher.adampadam.itecher.adapter.Word;
-import com.itecher.adampadam.itecher.data.DictDbHelper;
+import com.itecher.adampadam.itecher.data.mydict.MyDictDbHelper;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -33,8 +33,8 @@ public class GrammarListenActivity extends AppCompatActivity {
     private static Button ok;
     private static Button next;
     public static ArrayList<Word> list_learn_word;
-    protected static DictDbHelper dictdbh;
-    protected static SQLiteDatabase db;
+    protected static MyDictDbHelper mydictdbh;
+    protected static SQLiteDatabase mydb;
     protected static Word right_answer;
     private static int right_answer_number;
     public static boolean first_begin = true;
@@ -48,17 +48,17 @@ public class GrammarListenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_grammar_listen);
         context = getApplicationContext();
         speaker = new Speaker(context);
-        back = (ImageButton) findViewById(R.id.back_btn);
-        question = (ImageButton) findViewById(R.id.audio_grammar);
-        right = (TextView) findViewById(R.id.right);
+        back = (ImageButton) findViewById(R.id.back_gl_imgbtn);
+        question = (ImageButton) findViewById(R.id.audio_grammar_imgbtn);
+        right = (TextView) findViewById(R.id.right_tv);
         answer = (EditText) findViewById(R.id.answer_et);
-        ok = (Button) findViewById(R.id.ok);
-        next = (Button) findViewById(R.id.next);
+        ok = (Button) findViewById(R.id.ok_btn);
+        next = (Button) findViewById(R.id.next_btn);
 
-        dictdbh = new DictDbHelper(context);
-        db = dictdbh.getReadableDatabase();
+        mydictdbh = new MyDictDbHelper(context);
+        mydb = mydictdbh.getReadableDatabase();
 
-        list_learn_word = dictdbh.get_word_from_db(db);
+        list_learn_word = fillData(mydictdbh.get_word_from_db(mydb), PracticeActivity.group_number);
 
         if (first_begin) {
             update();
@@ -75,45 +75,28 @@ public class GrammarListenActivity extends AppCompatActivity {
                 next.setClickable(true);
                 answer.setActivated(false);
 
-                String s = right_answer.getEng_word();
-                s = s.toLowerCase();
+                if (((right_answer.getEng_word()).toLowerCase()).equals(((answer.getText()).toString()).toLowerCase())) {
 
-                char[] c = s.toCharArray();
-
-                while (c[c.length - 1] == ' ') {
-
-                    c = s.toCharArray();
-
-                    s = "";
-
-                    for (int i = 0; i < c.length - 1; i++) {
-
-                        s += c[i];
-
-                    }
-
-                }
-
-                if (s.equals(((answer.getText()).toString()).toLowerCase())) {
-
-                    right.setBackgroundColor(getResources().getColor(R.color.green));
+                    right.setBackground(getResources().getDrawable(R.drawable.round_btn_right));
                     right.setText(getResources().getString(R.string.right));
-                    answer.setBackgroundColor(getResources().getColor(R.color.green));
+                    answer.setBackgroundColor(getResources().getColor(R.color.primary));
                     right_answer.setLevel(right_answer.getLevel() + 1);
                     EndPracticeActivity.all_word_number++;
                     EndPracticeActivity.right_word_number++;
+                    ProfileActivity.answer_p_good++;
 
                 } else {
 
-                    right.setBackgroundColor(getResources().getColor(R.color.red));
-                    right.setText(getResources().getString(R.string.not_right) + getString(R.string.right_answer_text) + s);
-                    answer.setBackgroundColor(getResources().getColor(R.color.red));
+                    right.setBackground(getResources().getDrawable(R.drawable.round_btn_notright));
+                    right.setText(getResources().getString(R.string.not_right) + getString(R.string.right_answer_text) + (right_answer.getEng_word()).toLowerCase());
+                    answer.setBackgroundColor(getResources().getColor(R.color.primary_red));
                     right_answer.setLevel(right_answer.getLevel() - 1);
                     EndPracticeActivity.all_word_number++;
+                    ProfileActivity.answer_p_bad++;
 
                 }
 
-                dictdbh.update_word_from_db(db, right_answer);
+                mydictdbh.update_word_from_db(mydb, right_answer);
 
             }
         });
@@ -124,7 +107,7 @@ public class GrammarListenActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                list_learn_word = dictdbh.get_word_from_db(db);
+                list_learn_word = fillData(mydictdbh.get_word_from_db(mydb), PracticeActivity.group_number);
                 MainActivity.isBack = true;
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -151,7 +134,7 @@ public class GrammarListenActivity extends AppCompatActivity {
                 right.setVisibility(view.INVISIBLE);
                 next.setVisibility(view.INVISIBLE);
                 ok.setVisibility(view.VISIBLE);
-                right.setBackgroundColor(getResources().getColor(R.color.white));
+                right.setBackground(getResources().getDrawable(R.drawable.round_btn));
                 answer.setBackgroundColor(getResources().getColor(R.color.white));
                 update();
 
@@ -216,9 +199,9 @@ public class GrammarListenActivity extends AppCompatActivity {
 
         list_learn_word.remove(right_answer);
 
-        list_learn_word = fillData(list_learn_word, PracticeActivity.group_number);
+        list_learn_word = fillData(mydictdbh.get_word_from_db(mydb), PracticeActivity.group_number);
 
-        if (list_learn_word.size() < (dictdbh.get_word_from_db(db).size()) - x) {
+        if (list_learn_word.size() < (mydictdbh.get_word_from_db(mydb).size()) - x) {
 
             speaker.speak(right_answer.getEng_word());
             x = 1;
@@ -228,8 +211,7 @@ public class GrammarListenActivity extends AppCompatActivity {
     }
 
     private static void end() {
-        ProfileActivity.PracticeCount++;
-        list_learn_word = dictdbh.get_word_from_db(db);
+        list_learn_word = fillData(mydictdbh.get_word_from_db(mydb), PracticeActivity.group_number);
         if (!EndPracticeActivity.first_end) EndPracticeActivity.update();
         Intent intent = new Intent(context, EndPracticeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
