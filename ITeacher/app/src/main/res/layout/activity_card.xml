@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_card"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context="com.itecher.adampadam.iteacher.CardActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/search_edittext_my_dict_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/search"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/text" />
+
+            <ImageButton
+                android:id="@+id/search_btn_my_dict_imgbtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:background="@color/null_color"
+                android:src="@mipmap/ic_magnify" />
+
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/spinner_my_dict_sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/group"
+            android:spinnerMode="dialog" />
+
+        <ListView
+            android:id="@+id/main_my_dict_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/null_color"
+            android:cacheColorHint="@color/null_color" />
+
+        <Button
+            android:id="@+id/del_word_in_dict_my_dict_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/round_btn"
+            android:text="@string/del_word_in_dict_my_dict"
+            android:textColor="@color/text" />
+
+    </LinearLayout>
+
+</RelativeLayout>
