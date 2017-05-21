@@ -6,7 +6,7 @@
     <string name="begin">начать</string>
     <string name="right">верно</string>
     <string name="not_right">неверно</string>
-    <string name="right_answer_text">", правельный ответ: "</string>
+    <string name="right_answer_text">", правильный ответ: "</string>
 
 
     <string name="search">Поиск</string>
@@ -18,7 +18,7 @@
     <string name="word_eng">перевод:</string>
     <string name="rus">слово на английском</string>
     <string name="eng">слово на русском</string>
-    <string name="knowlegy">степень изучености</string>
+    <string name="knowlegy">степень изученности</string>
     <string name="group_word">группа слов</string>
     <string name="abbrev">(абревиатура)</string>
 
@@ -49,7 +49,7 @@
     <string-array name="group_not_all">
         <item>все</item>
         <item>полезные глаголы</item>
-        <item>компютер</item>
+        <item>компьютер</item>
         <item>программирование</item>
         <item>интернет</item>
     </string-array>
@@ -57,28 +57,28 @@
     <string name="word_translate_select">выбор: слово - перевод</string>
     <string name="translate_word_select">выбор: перевод - слово</string>
     <string name="listen_select">выбор: прослушивание</string>
-    <string name="listen_grammar">граматика: прослушивание</string>
+    <string name="listen_grammar">грамматика: прослушивание</string>
 
     <string-array name="group">
         <item>все</item>
         <item>полезные глаголы</item>
-        <item>компютер</item>
+        <item>компьютер</item>
         <item>программирование</item>
         <item>интернет</item>
-        <item>не выученые</item>
-        <item>плохо выученые</item>
-        <item>хорошо выученые</item>
-        <item>превосходно выученые</item>
+        <item>не выученные</item>
+        <item>плохо выученные</item>
+        <item>хорошо выученные</item>
+        <item>превосходно выученные</item>
     </string-array>
 
     <string name="useful_verbs">полезные глаголы</string>
-    <string name="computer">компютер</string>
+    <string name="computer">компьютер</string>
     <string name="programming">программирование</string>
     <string name="net">интернет</string>
-    <string name="unknown_word">не выученые</string>
-    <string name="bad_know_word">плохо выученые</string>
-    <string name="good_know_word">хорошо выученые</string>
-    <string name="the_best_know_word">превосходно выученые</string>
+    <string name="unknown_word">не выученные</string>
+    <string name="bad_know_word">плохо выученные</string>
+    <string name="good_know_word">хорошо выученные</string>
+    <string name="the_best_know_word">превосходно выученные</string>
 
 
     <string name="null_text">NULL</string>
@@ -89,9 +89,9 @@
 
 
     <string name="all_word">все слова изучены</string>
-    <string name="not_errors">вы пока не разу не ошиблись</string>
+    <string name="not_errors">вы ни разу не ошиблись</string>
     <string name="all_practice_good">все тренировки прошли успешно</string>
-    <string name="good_practice">хорошо пройденые тренировки</string>
+    <string name="good_practice">хорошо пройденные тренировки</string>
     <string name="know_word">изучаемые слова</string>
     <string name="right_answer_in_practice">правильных ответов в тренировках</string>
 
@@ -101,7 +101,7 @@
         <item>﻿2;to boot;NULL;загружаться;NULL;1</item>
         <item>﻿3;to burn;NULL;записывать на оптический диск;NULL;1</item>
         <item>﻿4;to create;NULL;создавать;NULL;1</item>
-        <item>﻿5;to compile;NULL;компиsлировать;NULL;1</item>
+        <item>﻿5;to compile;NULL;компилировать;NULL;1</item>
         <item>﻿6;to compress;NULL;сжимать;NULL;1</item>
         <item>﻿7;to connect;NULL;подключаться;NULL;1</item>
         <item>﻿8;to copy;NULL;копировать;NULL;1</item>
