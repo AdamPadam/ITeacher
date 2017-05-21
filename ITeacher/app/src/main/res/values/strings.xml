@@ -23,7 +23,7 @@
     <string name="abbrev">(абревиатура)</string>
 
 
-    <string name="practice_text">тренировать слова из словоря:</string>
+    <string name="practice_text">тренировка:</string>
     <string name="practice_go_text">НАЧАТЬ</string>
     <string name="is_little_word">в словаре нет слов</string>
     <string name="ok">OK</string>
